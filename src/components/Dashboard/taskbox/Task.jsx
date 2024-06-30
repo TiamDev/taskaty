@@ -65,14 +65,42 @@ const Task = ({
     const updatedTasksData = taskData.filter((task) => {
       return task.id !== id;
     });
+    handleDeleteClose();
     setTaskData(updatedTasksData);
   };
   return (
     <>
-      <div
-        className={`card  mb-4 clickable-card  ${isComplete ? "checked" : ""}`}
-      >
-        <div className={`card-body `} onClick={handleCheckClick}>
+      <div className={`card  mb-4 `}>
+        <span className="col menu-box text-center">
+          <div className="dropdown">
+            <button
+              className="dropdown-toggle "
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="bi bi-three-dots"></i>
+            </button>
+            <ul className="dropdown-menu dropdown-menu-dark">
+              <li>
+                <button className="dropdown-item " onClick={setShowEdit}>
+                  <h6>Edit</h6>
+                  <i className="bi bi-vector-pen"></i>
+                </button>
+              </li>
+              <li>
+                <button className="dropdown-item " onClick={setShowDelete}>
+                  <h6>Delete</h6>
+                  <i className="bi bi-trash3"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </span>
+        <div
+          className={`card-body clickable-card  ${isComplete ? "checked" : ""}`}
+          onClick={handleCheckClick}
+        >
           <span className="done-box">
             <span className="done"></span>
           </span>
@@ -99,32 +127,6 @@ const Task = ({
           <div className="row">
             <span className="col time">
               {startTime} - {endTime}
-            </span>
-            <span className="col menu-box text-end">
-              <div className="dropdown">
-                <button
-                  className="dropdown-toggle "
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i className="bi bi-three-dots"></i>
-                </button>
-                <ul className="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <button className="dropdown-item " onClick={setShowEdit}>
-                      <h6>Edit</h6>
-                      <i className="bi bi-vector-pen"></i>
-                    </button>
-                  </li>
-                  <li>
-                    <button className="dropdown-item " onClick={setShowEdit}>
-                      <h6>Delete</h6>
-                      <i className="bi bi-trash3"></i>
-                    </button>
-                  </li>
-                </ul>
-              </div>
             </span>
           </div>
         </div>
@@ -157,6 +159,7 @@ const Task = ({
             <textarea
               className="form-control"
               value={editTask.description}
+              name="description"
               onChange={(e) =>
                 setEditTask({ ...editTask, [e.target.name]: e.target.value })
               }
@@ -269,11 +272,7 @@ const Task = ({
           <Button onClick={handleEditClose} className="btn btn-secondary">
             Close
           </Button>
-          <Button
-            onClick={handleEditClick}
-            type="button"
-            className="btn btn-primary"
-          >
+          <Button onClick={handleEditClick} className="btn btn-primary">
             Save changes
           </Button>
         </Modal.Footer>
@@ -292,16 +291,9 @@ const Task = ({
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete ?</Modal.Body>
         <Modal.Footer>
-          <button type="button" className="btn btn-secondary">
-            Back
-          </button>
-          <button
-            type="button"
-            onClick={handleDeleteClick}
-            className="btn btn-primary"
-          >
+          <Button onClick={handleDeleteClick} className="btn btn-primary">
             Delete
-          </button>
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

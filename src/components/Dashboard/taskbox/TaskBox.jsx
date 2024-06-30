@@ -8,7 +8,7 @@ const TaskBox = () => {
 
   let taskList = taskData.map((task) => {
     return (
-      <div className="col-lg-4 col-md-4 col-sm-2  " key={task.id}>
+      <div className="col-lg-4 col-md-4 col-sm-2 taskbox " key={task.id}>
         <Task
           key={task.id}
           id={task.id}

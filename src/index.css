@@ -84,10 +84,9 @@ textarea {
 }
 
 body {
-  background-color: var(--body-color);
   line-height: 1.7;
+  background-color: gainsboro;
   color: var(--text-color);
-  overflow: hidden;
 }
 h1,
 h2,

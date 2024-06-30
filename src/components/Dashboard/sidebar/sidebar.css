@@ -45,7 +45,7 @@
 .nav__toggle {
   position: fixed;
   top: 1.25rem;
-  left: 1.875rem;
+  left: 1.375rem;
   cursor: pointer;
   width: 45px;
   height: 40px;
@@ -63,6 +63,7 @@
   }
   .nav__toggle {
     display: flex;
+    z-index: 100;
   }
   .nav__toggle-open {
     left: 280px;

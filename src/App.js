@@ -10,7 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext";
 import ProtectedRoutes from "./Services/ProtectedRoutes";
 import { useState } from "react";
-import { UserData } from "./components/Data/Users";
+import { UserData } from "./Data/Users";
 
 function App() {
   // let UserData = [];
