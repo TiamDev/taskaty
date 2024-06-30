@@ -1,38 +1,20 @@
 .App {
-  text-align: center;
+  /* background-image: url("./assets/image/Animated\ Shape.svg");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  background-color: gainsboro;
+  height: 100vh;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dashboard {
+  padding: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+  margin-left: 270px;
+  transition: all 0.3s ease-in-out;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media screen and (max-width: 1024px) {
+  .content {
+    margin-left: 0px;
+    margin-top: 47px;
   }
 }

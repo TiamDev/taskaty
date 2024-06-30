@@ -1,0 +1,10 @@
+.header {
+  /* background-color: var(--body-color); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px var(--padding__small);
+}
+.header h1 {
+  line-height: 1.2;
+}

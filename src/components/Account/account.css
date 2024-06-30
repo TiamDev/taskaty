@@ -1,0 +1,61 @@
+.account {
+  background-image: url("./../../assets/image/Animated\ Shape.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.box {
+  width: 100vh;
+}
+.wrap {
+  flex-wrap: wrap-reverse;
+}
+.image__container {
+  position: relative;
+}
+.image-signin {
+  /* position: absolute;
+  width: 23rem;
+  bottom: 3vh;
+  left: 1vw; */
+  position: absolute;
+  width: 23rem;
+  bottom: 3vh;
+  left: -2vw;
+}
+.image-signup {
+  position: absolute;
+  width: 24rem;
+  bottom: 6vh;
+  left: -1vw;
+  /* position: absolute;
+  width: 23rem;
+  bottom: 5vh;
+  left: 2vw; */
+}
+@media screen and (max-width: 768px) {
+  .image__container {
+    height: 20vh;
+  }
+  .image-signin,
+  .image-signup {
+    position: static;
+    width: 18vh;
+    margin-left: 25vw;
+  }
+  .image-signup {
+    margin-left: 21vw;
+  }
+}
+.subtitle {
+  color: var(--third);
+}
+.input-field {
+}
+.input-field input {
+  border: 1px solid gray;
+}
+.link {
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+}

@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App";
+import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+// import $ from "jquery";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Signin from "./components/Account/Signin";
+import Signup from "./components/Account/Signup";
+import { Route, Routes } from "react-router-dom";
+import { UserContext } from "./contexts/UserContext";
+import ProtectedRoutes from "./Services/ProtectedRoutes";
+import { useState } from "react";
+import { UserData } from "./components/Data/Users";
 
 function App() {
+  // let UserData = [];
+
+  const [userData, setUserData] = useState(UserData);
+
+  const createUser = (newUser) => {
+    setUserData([...userData, newUser]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ userData, createUser }}>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<ProtectedRoutes />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </div>
+    </UserContext.Provider>
   );
 }
 

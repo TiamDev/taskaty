@@ -1,13 +1,98 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bad+Script&family=Castoro:ital@0;1&family=Changa:wght@200;400;600;700&family=Economica&family=Kalam:wght@300;400&family=Montserrat:wght@100;200;300;400;500;700&family=Noto+Kufi+Arabic:wght@100;300;400;600&family=Readex+Pro:wght@200;300;400;600&family=Rubik:ital,wght@0,700;1,700&family=Sofia+Sans+Condensed:wght@1;100;400;600&family=Srisakdi:wght@400;700&family=Tajawal:wght@200;400;700&display=swap");
+:root {
+  /* color */
+  --first-color: #f0e790;
+  --second-color: #829db0;
+  --hover-color: #eadb56;
+  --body-color: #f2f1f5;
+  --primary: #dc3545;
+  --secondary: #3655b3;
+  --third: #616060;
+  /* --container-color: #fff; */
+  /* Font Size */
+  --body-font: Montserrat3, sans-serif;
+  --hl-font-size: 2.25rem;
+  --h2-font-size: 1.5rem;
+  --h3-font-size: 1.25rem;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+  --smaller-font-size: 0.813rem;
+  /* Font Weight */
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  /* Box Shadow */
+  --shadow: 0px 5px 20px 0px rgb(69 67 96 / 10%);
+  /* Border Radius */
+  --border-radius: 15px;
+  --border: 1px solid white;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --padding__medium: 20px;
+  --padding__small: 10px;
+
+  --transition: all 0.3s ease-in-out;
+}
+/* Custom Fonts */
+@font-face {
+  font-family: Montserrat;
+  src: url("./assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: Montserrat2;
+  src: url("./assets/fonts/Playwrite_DE_Grund/PlaywriteDEGrund-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: Montserrat3;
+  src: url("./assets/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.ttf");
+}
+.necessary {
+  color: var(--primary);
+}
+.important {
+  color: var(--secondary);
+}
+.normal {
+  color: var(--third);
+}
+.daily {
+  color: var(--fourth);
+}
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+@media screen and (max-width: 1024px) {
+  :root {
+    --hl-font-size: 1.75rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+  }
+}
+body,
+button,
+input,
+textarea {
+  font-family: var(--body-font) !important;
+  font-size: var(--normal-font-size);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: var(--body-color);
+  line-height: 1.7;
+  color: var(--text-color);
+  overflow: hidden;
+}
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
 }
