@@ -59,7 +59,7 @@ Taskaty is designed to help individuals and teams organize, track, and manage ta
   <img src="./src/assets/image/Taskaty/5.png" alt="Alt Text"  />
 </div>
 <div align="center">
-  <img src="./src/assets/image/Taskaty/10.png" alt="Alt Text"  />
+  <img width="50%" src="./src/assets/image/Taskaty/10.png" alt="Alt Text"  />
 </div>
 ## Technologies Used
 
