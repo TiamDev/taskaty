@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import "./sidebar.css";
 import logo from "./../../../assets/image/logo.png";
 import pic from "./../../../assets/image/mochi-jolly-young-man-and-woman.png";
-import Calendar from "./Calendar";
+import "./calender.css";
+import Calendar from "react-calendar";
+import "./sidebar.css";
+
+// import Calendar from "./Calendar";
+
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-const Sidebar = () => {
+import { SelectedDateContext } from "../../../contexts/SelectedDate";
+const Sidebar = ({ user }) => {
   const [toggle, showMenu] = useState(false);
-  // const users = useContext(UserContext);
-  // const { id } = useParams();
-  // const user = users.find((u) => {
-  //   return u.id == id;
-  // });
+  // const [calender, setCalender] = useState(new Date().toLocaleDateString());
+  const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
   const navigat = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
   const handleLogout = () => {
     localStorage.removeItem("loggedin");
     localStorage.removeItem("user");
@@ -27,10 +29,16 @@ const Sidebar = () => {
       <aside className={toggle ? "sidebar show-menu" : "sidebar"}>
         <img src={logo} className="logo" alt="" />
         <div className="side-content">
-          <Calendar></Calendar>
+          <Calendar
+            onClickDay={(e) => {
+              setSelectedDate(e.toLocaleDateString());
+              console.log(user);
+            }}
+            value={selectedDate}
+          />
           <div className={"profile center"}>
             <img src={pic} alt="" />
-            <p> Hi, {user.username}</p>
+            <p> Hi, {user}</p>
             <button
               type="button"
               onClick={handleLogout}

@@ -4,20 +4,11 @@ import logo from "./../../assets/image/logo.png";
 import image from "./../../assets/image/mochi-young-man-or-teenager-skateboarding.png";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
+import { v4 as uuidv4 } from "uuid";
 
 const Signup = () => {
-  // const navigat = useNavigate();
-  // const [input, setInput] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  // });
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   localStorage.setItem("user", JSON.stringify(input));
-  //   navigat("/");
-  // };
-  const { userData, createUser } = useContext(UserContext);
+  // const { userData, createUser } = useContext(UserContext);
+  const [error, setError] = useState("");
 
   const [input, setInput] = useState({
     username: "",
@@ -29,14 +20,24 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const existingUser = users.find((user) => user.email === input.email);
+    if (existingUser) {
+      setError("البريد الالكتروني موجود مسبقا");
+      return;
+    }
+
     const newUser = {
-      id: userData.length + 1,
+      id: uuidv4(),
       username: input.username,
       email: input.email,
       password: input.password,
     };
 
-    createUser(newUser);
+    // createUser(newUser);
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+
     setInput({
       username: "",
       email: "",
@@ -54,7 +55,7 @@ const Signup = () => {
                 <img src={logo} height={"30px"} alt="" />
                 <h1>Sign Up</h1>
                 <p className="subtitle">
-                  Hi! Turn your goals into achievements with Taskaty.
+                  Turn your goals into achievements with Taskaty.
                 </p>
                 <form action="" onSubmit={handleSubmit}>
                   <div className=" input-field mt-2">

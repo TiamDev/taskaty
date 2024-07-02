@@ -8,6 +8,8 @@ import { useContext } from "react";
 
 const Signin = () => {
   const { userData } = useContext(UserContext);
+  const [error, setError] = useState("");
+
   const [input, setInput] = useState({
     id: "",
     email: "",
@@ -17,15 +19,15 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const user = userData.find((u) => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find((u) => {
       return u.email === input.email && u.password === input.password;
     });
 
     if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("loggedin", "true");
-      navigate("/dashboard");
+      navigate("/dashboard", { state: user.id });
     } else {
       // Check if the user is not found in the userData file
       const newUser = userData.find((u) => u.email === input.email);

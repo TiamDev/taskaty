@@ -64,6 +64,7 @@
 }
 html {
   scroll-behavior: smooth;
+  background-color: gainsboro;
 }
 @media screen and (max-width: 1024px) {
   :root {

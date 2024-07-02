@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./taskbox.css";
+import image from "./../../../assets/image/mochi-post-it-notes (1).png";
+
 import { TaskContext } from "../../../contexts/TaskContext";
-// import Button from "react-bootstrap/Button";
 import { Modal, Button } from "react-bootstrap";
-import { data } from "jquery";
 const Task = ({
   id,
   title = "task title",
   description = "description",
   date,
-  startTime = "8:00 am",
-  endTime = "9:00 pm",
+  startTime,
+  endTime,
   priority = "important",
-
   isComplete,
 }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
@@ -27,7 +26,10 @@ const Task = ({
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-
+  // useEffect(() => {
+  //   const storageTasks = JSON.parse(localStorage.getItem("tasks"));
+  //   setTaskData(storageTasks);
+  // }, []);
   const handleEditClose = () => setShowEdit(false);
   const handleDeleteClose = () => setShowDelete(false);
 
@@ -42,10 +44,11 @@ const Task = ({
       return task;
     });
     setTaskData(updatedTaskData);
+    localStorage.setItem("tasks", JSON.stringify(updatedTaskData));
   };
   const handleEditClick = () => {
     const updatedTasksData = taskData.map((task) => {
-      if (task.id == id) {
+      if (task.id === id) {
         return {
           ...task,
           title: editTask.title,
@@ -59,6 +62,8 @@ const Task = ({
       return task;
     });
     setTaskData(updatedTasksData);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasksData));
+
     handleEditClose();
   };
   const handleDeleteClick = () => {
@@ -67,7 +72,24 @@ const Task = ({
     });
     handleDeleteClose();
     setTaskData(updatedTasksData);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasksData));
   };
+  function convertTo12HourFormat(time24) {
+    let [hours, minutes] = time24.split(":");
+    let period = "AM";
+
+    if (parseInt(hours) >= 12) {
+      period = "PM";
+    }
+
+    if (parseInt(hours) > 12) {
+      hours = (parseInt(hours) - 12).toString();
+    } else if (parseInt(hours) === 0) {
+      hours = "12";
+    }
+
+    return `${hours}:${minutes} ${period}`;
+  }
   return (
     <>
       <div className={`card  mb-4 `}>
@@ -111,13 +133,13 @@ const Task = ({
               name="check"
               id="check"
               checked={isComplete}
-              onChange={() => {}}
+              // onChange={() => {}}
               style={{ display: "none" }}
             />
             {title}
           </h5>
 
-          <p className="card-text">{description}</p>
+          <h6 className="card-text">{description}</h6>
           <div className="row">
             <span className={`priority ${priority}`}>
               <i className="bi bi-flag-fill  pe-1"></i>
@@ -126,7 +148,8 @@ const Task = ({
           </div>
           <div className="row">
             <span className="col time">
-              {startTime} - {endTime}
+              {convertTo12HourFormat(startTime)} -{" "}
+              {convertTo12HourFormat(endTime)}
             </span>
           </div>
         </div>
@@ -139,7 +162,10 @@ const Task = ({
         id="edit"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Edit Task</Modal.Title>
+          <Modal.Title>
+            <img src={image} width={"35rem"} className="me-3" alt="" />
+            Edit Task
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mt-2">
@@ -170,7 +196,7 @@ const Task = ({
               <div className="">
                 <label htmlFor="date">Date</label>
                 <input
-                  type="date"
+                  type="datetime-date"
                   name="date"
                   value={editTask.date}
                   onChange={(e) =>
@@ -218,51 +244,78 @@ const Task = ({
               </div>
             </div>
             <fieldset className="row mb-3 mt-2">
-              <legend className="col-form-label col-sm-2 pt-0">Priority</legend>
-              <div className="col-sm-10">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="priority"
-                    value={editTask.priority}
-                    checked={editTask.priority === "necessary"}
-                    onChange={(e) =>
-                      setEditTask({
-                        ...editTask,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios1">
-                    Necessary
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios2"
-                    value="important"
-                    checked={editTask.priority === "important"}
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios2">
-                    Important
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios3"
-                    value="normal"
-                    checked={editTask.priority === "normal"}
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios2">
-                    Normal
-                  </label>
+              <label className=" ">Priority</label>
+              <div className="col-sm-10  mt-2">
+                <div className="d-flex justify-content-between">
+                  <div
+                    className={`form-check  ${
+                      editTask.priority === "necessary" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="necessary">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="necessary"
+                        value="necessary"
+                        checked={editTask.priority === "necessary"}
+                        onChange={(e) =>
+                          setEditTask({
+                            ...editTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Necessary
+                    </label>
+                  </div>
+                  <div
+                    className={`form-check ${
+                      editTask.priority === "important" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="important">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="important"
+                        value="important"
+                        checked={editTask.priority === "important"}
+                        onChange={(e) =>
+                          setEditTask({
+                            ...editTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Important
+                    </label>
+                  </div>
+                  <div
+                    className={`form-check ${
+                      editTask.priority === "normal" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="normal">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="normal"
+                        value="normal"
+                        checked={editTask.priority === "normal"}
+                        onChange={(e) =>
+                          setEditTask({
+                            ...editTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Normal
+                    </label>
+                  </div>
                 </div>
               </div>
             </fieldset>

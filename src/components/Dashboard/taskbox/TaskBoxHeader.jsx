@@ -1,34 +1,49 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./taskbox.css";
+import image from "./../../../assets/image/mochi-confused-thoughts-icon.png";
+
 import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Button, Modal } from "react-bootstrap";
-const TaskBoxHeader = () => {
-  // const user = JSON.parse(localStorage.getItem("user"));
+import { TypeContext } from "../../../contexts/TypeContext";
+import {
+  PriorityContext,
+  SearchContext,
+} from "../../../contexts/SearchContext";
+const TaskBoxHeader = ({ user }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
   const [showAdd, setShowAdd] = useState(false);
+  const [date, setdate] = useState(new Date());
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   const [addTask, setAddTask] = useState({
     title: "",
     description: "",
     startTime: "",
     endTime: "",
-    date: "",
+    date: formatDate(new Date()),
     priority: "necessary",
   });
+
   const handleAddClose = () => setShowAdd(false);
   const handleAddShow = () => setShowAdd(true);
-
   const handleAddTask = () => {
     const newTask = {
       id: uuidv4(),
-      user_id: 3,
+      user_id: user,
       isComplete: false,
       title: addTask.title,
-      description: addTask.description,
-      startTime: "6:00 am",
-      endTime: "9:00 pm",
-      date: addTask.date,
+      description:
+        addTask.description == "" ? "no description" : addTask.description,
+      startTime: addTask.startTime,
+      endTime: addTask.endTime,
+      date: new Date(addTask.date).toLocaleDateString(),
       priority: addTask.priority,
     };
     const createTask = [...taskData, newTask];
@@ -41,20 +56,41 @@ const TaskBoxHeader = () => {
       startTime: "",
       endTime: "",
       date: "",
-      priority: "",
+      priority: "necessary",
     });
   };
+  useEffect(() => {
+    const storageTask = localStorage.getItem("tasks");
+    if (storageTask) {
+      try {
+        const storageTodo = JSON.parse(storageTask);
+        setTaskData(storageTodo);
+      } catch (error) {
+        console.error("Error parsing localStorage data:", error);
+        setTaskData([]);
+      }
+    } else {
+      setTaskData([]);
+    }
+  }, []);
+  const { displayType, setDisplayType } = useContext(TypeContext);
+
+  const changeDisplyType = (e) => {
+    setDisplayType(e);
+  };
+  const { setSearch } = useContext(SearchContext);
+
   return (
     <>
       <div className="taskbox__header">
         <div className="row">
           {" "}
           <div className="">
-            <h1>Today Tasks</h1>
+            <h1> Tasks</h1>
           </div>
         </div>
         <div className="row">
-          <div className="col-4">
+          <div className="col-5">
             <div className="input-group mb-3">
               <input
                 type="text"
@@ -62,13 +98,16 @@ const TaskBoxHeader = () => {
                 placeholder="search"
                 aria-label="search"
                 aria-describedby="basic-addon2"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
               <span className="input-group-text" id="basic-addon2">
                 <i className="bi bi-search"></i>
               </span>
             </div>
           </div>
-          <div className="col-4 d-flex">
+          <div className="col-5 d-flex">
             <div className="dropdown pe-3">
               <button
                 className="dropdown-toggle"
@@ -76,56 +115,47 @@ const TaskBoxHeader = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Status
+                {displayType}
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a className="dropdown-item " href="#">
+                  <Button
+                    className="dropdown__btn"
+                    value={"all"}
+                    onClick={(e) => {
+                      changeDisplyType(e.target.value);
+                    }}
+                  >
                     all
-                  </a>
+                  </Button>
                 </li>
                 <li>
-                  <a className="dropdown-item " href="#">
+                  <Button
+                    className="dropdown__btn"
+                    value={"Completed"}
+                    onClick={(e) => {
+                      changeDisplyType(e.target.value);
+                    }}
+                  >
                     Completed
-                  </a>
+                  </Button>{" "}
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Button
+                    className="dropdown__btn"
+                    value={"Uncompleted"}
+                    onClick={(e) => {
+                      changeDisplyType(e.target.value);
+                    }}
+                  >
                     Uncompleted
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="dropdown">
-              <button
-                className="dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Priority
-              </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li className="dropdown-item active">
-                  {/* <a className="dropdown-item active " href="#"> */}
-                  <i className="bi bi-flag-fill necessary pe-1"></i> Necessary
-                  {/* </a> */}
-                </li>
-                <li className="dropdown-item ">
-                  {/* <a className="dropdown-item active " href="#"> */}
-                  <i className="bi bi-flag-fill important pe-1"></i> Important
-                  {/* </a> */}
-                </li>
-                <li className="dropdown-item ">
-                  {/* <a className="dropdown-item active " href="#"> */}
-                  <i className="bi bi-flag-fill normal pe-1"></i> Normal
-                  {/* </a> */}
+                  </Button>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="col-4 text-end">
+          <div className="col-2 text-end">
             <Button
               className={"btn btn-primary btn-add"}
               onClick={handleAddShow}
@@ -138,154 +168,188 @@ const TaskBoxHeader = () => {
       {/*  Modal  */}
       <Modal show={showAdd} onHide={handleAddClose}>
         <Modal.Header closeButton>
-          <Modal.Title>New Task</Modal.Title>
+          <Modal.Title>
+            <img src={image} width={"35rem"} className="me-3" alt="" />
+            New Task
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <div className="mt-2">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              value={addTask.title}
-              onChange={(e) =>
-                setAddTask({ ...addTask, [e.target.name]: e.target.value })
-              }
-              name="title"
-              className="form-control"
-            />
-          </div>
-          <div className="mt-2">
-            <label htmlFor="description">Description</label>
-            <textarea
-              className="form-control"
-              name="description"
-              value={addTask.description}
-              onChange={(e) =>
-                setAddTask({ ...addTask, [e.target.name]: e.target.value })
-              }
-            ></textarea>
-          </div>
-          <div className="row mt-2">
-            <div className="col-lg-4 col-sm-12">
-              <div className="">
-                <label htmlFor="title">Date</label>
+        <div className="row">
+          <div className="col-6">
+            <Modal.Body>
+              <div className="mt-2 ">
+                <label htmlFor="title">Title</label>
                 <input
-                  type="date"
-                  name="date"
-                  value={addTask.date}
+                  type="text"
+                  value={addTask.title}
                   onChange={(e) =>
-                    setAddTask({
-                      ...addTask,
-                      [e.target.name]: e.target.value,
-                    })
+                    setAddTask({ ...addTask, [e.target.name]: e.target.value })
                   }
+                  name="title"
                   className="form-control"
                 />
               </div>
-            </div>
-            <div className="col-lg-4 col-sm-6">
-              <div className="">
-                <label htmlFor="title">Starts</label>
-                <input
-                  type="time"
-                  name="startTime"
-                  value={addTask.startTime}
-                  onChange={(e) =>
-                    setAddTask({
-                      ...addTask,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
+              <div className="mt-2">
+                <label htmlFor="description">Description</label>
+                <textarea
                   className="form-control"
-                />
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6">
-              <div className="">
-                <label htmlFor="title">Endes</label>
-                <input
-                  type="time"
-                  value={addTask.endTime}
-                  name="endTime"
+                  name="description"
+                  value={addTask.description}
                   onChange={(e) =>
-                    setAddTask({
-                      ...addTask,
-                      [e.target.name]: e.target.value,
-                    })
+                    setAddTask({ ...addTask, [e.target.name]: e.target.value })
                   }
-                  className="form-control"
-                />
+                ></textarea>
               </div>
-            </div>
-            <fieldset className="row mb-3 mt-2">
-              <legend className="col-form-label col-sm-2 pt-0">Priority</legend>
-              <div className="col-sm-10">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="priority"
-                    id="necessary"
-                    value="necessary"
-                    checked={addTask.priority === "necessary"}
-                    onChange={(e) =>
-                      setAddTask({
-                        ...addTask,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                    // checked=""
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios1">
-                    Necessary
-                  </label>
+              <div className="row mt-2">
+                <div className="col-lg-4 col-sm-12">
+                  <div className="">
+                    <label htmlFor="title">Date</label>
+                    <input
+                      type="date"
+                      name="date"
+                      value={addTask.date}
+                      onChange={(e) => {
+                        setAddTask({
+                          ...addTask,
+                          [e.target.name]: e.target.value,
+                        });
+                      }}
+                      className="form-control"
+                    />
+                  </div>
                 </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="priority"
-                    id="important"
-                    value="important"
-                    checked={addTask.priority === "important"}
-                    onChange={(e) =>
-                      setAddTask({
-                        ...addTask,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios2">
-                    Important
-                  </label>
+                <div className="col-lg-4 col-sm-6">
+                  <div className="">
+                    <label htmlFor="title">Starts</label>
+                    <input
+                      type="time"
+                      name="startTime"
+                      value={addTask.startTime}
+                      onChange={(e) =>
+                        setAddTask({
+                          ...addTask,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                      className="form-control"
+                    />
+                  </div>
                 </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="priority"
-                    id="normal"
-                    value="normal"
-                    checked={addTask.priority === "normal"}
-                    onChange={(e) =>
-                      setAddTask({
-                        ...addTask,
-                        [e.target.name]: e.target.value,
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor="gridRadios2">
-                    Normal
-                  </label>
+                <div className="col-lg-4 col-sm-6">
+                  <div className="">
+                    <label htmlFor="title">Endes</label>
+                    <input
+                      type="time"
+                      value={addTask.endTime}
+                      name="endTime"
+                      onChange={(e) =>
+                        setAddTask({
+                          ...addTask,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                      className="form-control"
+                    />
+                  </div>
                 </div>
+                <fieldset className="row mb-3 mt-2">
+                  <label className=" ">Priority</label>
+                  <div className="col-sm-10  mt-2">
+                    <div className="d-flex justify-content-between">
+                      <div
+                        className={`form-check  ${
+                          addTask.priority === "necessary"
+                            ? "border__success"
+                            : ""
+                        }`}
+                      >
+                        <label htmlFor="necessary">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="priority"
+                            id="necessary"
+                            value="necessary"
+                            checked={addTask.priority === "necessary"}
+                            onChange={(e) =>
+                              setAddTask({
+                                ...addTask,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                          />
+                          Necessary
+                        </label>
+                      </div>
+                      <div
+                        className={`form-check ${
+                          addTask.priority === "important"
+                            ? "border__success"
+                            : ""
+                        }`}
+                      >
+                        <label htmlFor="important">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="priority"
+                            id="important"
+                            value="important"
+                            checked={addTask.priority === "important"}
+                            onChange={(e) =>
+                              setAddTask({
+                                ...addTask,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                          />
+                          Important
+                        </label>
+                      </div>
+                      <div
+                        className={`form-check ${
+                          addTask.priority === "normal" ? "border__success" : ""
+                        }`}
+                      >
+                        <label htmlFor="normal">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="priority"
+                            id="normal"
+                            value="normal"
+                            checked={addTask.priority === "normal"}
+                            onChange={(e) =>
+                              setAddTask({
+                                ...addTask,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                          />
+                          Normal
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
-            </fieldset>
+            </Modal.Body>
           </div>
-        </Modal.Body>
+          <div className="col-6">
+            <img src={image} width={"80rem"} className="me-3" alt="" />
+          </div>
+        </div>
         <Modal.Footer>
-          <Button onClick={handleAddClose} className="btn btn-secondary">
-            Close
-          </Button>
-          <Button onClick={handleAddTask} className="btn btn-primary">
+          <Button
+            onClick={handleAddTask}
+            disabled={
+              addTask.title === "" ||
+              addTask.startTime === "" ||
+              addTask.endTime === "" ||
+              addTask.date === "" ||
+              addTask.priority === ""
+            }
+            className="btn btn-primary"
+          >
             Create New Task
           </Button>
         </Modal.Footer>

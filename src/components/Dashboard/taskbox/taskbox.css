@@ -1,5 +1,4 @@
 .taskbox {
-  margin-top: 320px;
 }
 .taskbox__header {
   position: fixed;
@@ -9,15 +8,7 @@
   left: 290px;
   background-color: gainsboro;
 }
-@media screen and (max-width: 1024px) {
-  .taskbox {
-    margin-top: 300px;
-  }
-  .taskbox__header {
-    top: 15rem;
-    left: 20px;
-  }
-}
+
 .taskbox .form-control {
   background-color: rgba(255, 255, 255, 0.159);
   border: var(--border);
@@ -67,14 +58,17 @@
   --bs-btn-disabled-bg: var(--hover-color);
   --bs-btn-disabled-border-color: var(--hover-color);
 }
-
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  color: #000;
+}
 p {
   text-wrap: pretty;
 }
 .scroller {
-  /* overflow-y: auto; */
   white-space: nowrap;
-  /* max-height: 1vh; */
+  margin-top: 320px;
 }
 
 .scroller > .col {
@@ -85,7 +79,6 @@ p {
   transition: var(--transition);
   border-radius: 10px;
   transition: var(--transition);
-  /* background-color: #ffffff80; */
   background-color: var(--body-color);
   transition: all 0.5s ease-in-out;
 }
@@ -185,10 +178,47 @@ h5 {
 .checked p {
   text-decoration: line-through;
 }
+
+.dropdown__btn {
+  border: none;
+  background-color: inherit;
+  color: white;
+  font-weight: 400;
+  width: 100%;
+  text-align: start;
+}
+.dropdown__btn:hover {
+  border: none;
+  background-color: var(--first-color);
+  border: var(--first-color);
+}
+.form-check-input:checked {
+  background-color: #252525;
+  border-color: #212121;
+  /* background-image: none; */
+}
+.form-check {
+  margin-right: 11px;
+}
+.border__success {
+  /* border: 1px solid #000; */
+}
+.form-check-input:focus {
+  box-shadow: none;
+}
 /* 768-576 */
 @media screen and (max-width: 768px) and (min-width: 576px) {
   .scroller > div {
     flex: 0 0 auto;
     width: 49.666667%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .scroller {
+    margin-top: 322px;
+  }
+  .taskbox__header {
+    top: 15rem;
+    left: 20px;
   }
 }

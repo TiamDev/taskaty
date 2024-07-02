@@ -12,7 +12,7 @@
   flex-direction: column;
   /* justify-content: space-between; */
   align-items: center;
-  z-index: 2000;
+  z-index: 200;
   transition: 0.3s;
   border: var(--border);
   box-shadow: var(--shadow);
