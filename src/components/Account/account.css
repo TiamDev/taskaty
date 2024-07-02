@@ -59,3 +59,7 @@
   color: rgb(0, 0, 0);
   font-weight: 600;
 }
+.error__message {
+  color: red;
+  font-size: 16px;
+}

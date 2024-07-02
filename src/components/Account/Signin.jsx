@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./account.css";
-import logo from "./../../assets/image/logo.png";
+import logo from "./../../assets/image/Logo.svg";
 import image from "./../../assets/image/mochi-young-man-writing-in-folder-1.png";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -33,10 +33,10 @@ const Signin = () => {
       const newUser = userData.find((u) => u.email === input.email);
       if (newUser) {
         // User exists, but password is incorrect
-        alert("Incorrect password");
+        setError("Incorrect password");
       } else {
         // User not found in the userData file
-        alert("User not found");
+        setError("User not found");
       }
     }
   };
@@ -59,6 +59,7 @@ const Signin = () => {
                       type="email"
                       name="email"
                       value={input.email}
+                      required
                       className="form-control"
                       onChange={(e) =>
                         setInput({ ...input, [e.target.name]: e.target.value })
@@ -73,6 +74,7 @@ const Signin = () => {
                       // ref="password"
                       className="form-control"
                       value={input.password}
+                      required
                       onChange={(e) =>
                         setInput({
                           ...input,
@@ -81,11 +83,13 @@ const Signin = () => {
                       }
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary mt-3 w-100">
+                  <p className="error__message">{error}</p>
+
+                  <button type="submit" className="btn btn-primary  w-100">
                     Sign in
                   </button>
                 </form>
-                <p className="subtitle mt-2  ps-1">
+                <p className="subtitle   ps-1">
                   Create new account ?{" "}
                   <Link to="/signup">
                     <a href="#" className="link">

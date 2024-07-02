@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./account.css";
-import logo from "./../../assets/image/logo.png";
+import logo from "./../../assets/image/Logo.svg";
 import image from "./../../assets/image/mochi-young-man-or-teenager-skateboarding.png";
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -15,7 +15,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
-
+  const [confirmPass, setConfirmPass] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -23,10 +23,13 @@ const Signup = () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const existingUser = users.find((user) => user.email === input.email);
     if (existingUser) {
-      setError("البريد الالكتروني موجود مسبقا");
+      setError("Email already exists");
       return;
     }
-
+    if (input.password !== confirmPass) {
+      setError("password and confirm password do not match");
+      return;
+    }
     const newUser = {
       id: uuidv4(),
       username: input.username,
@@ -63,6 +66,7 @@ const Signup = () => {
                     <input
                       type="text"
                       name="username"
+                      required
                       className="form-control"
                       value={input.username}
                       onChange={(e) =>
@@ -77,11 +81,13 @@ const Signup = () => {
                       name="email"
                       value={input.email}
                       className="form-control"
+                      required
                       onChange={(e) =>
                         setInput({ ...input, [e.target.name]: e.target.value })
                       }
                     />
                   </div>
+
                   <div className="row">
                     <div className="col-6">
                       <div className=" input-field mt-2">
@@ -89,6 +95,7 @@ const Signup = () => {
                         <input
                           type="password"
                           name="password"
+                          required
                           className="form-control"
                           value={input.password}
                           onChange={(e) =>
@@ -100,21 +107,29 @@ const Signup = () => {
                         />
                       </div>
                     </div>
+
                     <div className="col-6">
                       <div className=" input-field mt-2">
-                        <label htmlFor="comfirmPassword">
-                          Comfirm Password
+                        <label htmlFor="confirmPassword">
+                          Confirm Password
                         </label>
                         <input
                           type="password"
-                          name="comfirmPassword"
+                          required
+                          name="confirmPassword"
+                          value={confirmPass}
+                          onChange={(e) => {
+                            console.log(e.target.value);
+                            setConfirmPass(e.target.value);
+                          }}
                           className="form-control"
                         />
                       </div>
                     </div>
                   </div>
+                  <p className="error__message">{error}</p>
 
-                  <button type="submit" className="btn btn-primary mt-3 w-100">
+                  <button type="submit" className="btn btn-primary  w-100">
                     Sign in
                   </button>
                 </form>

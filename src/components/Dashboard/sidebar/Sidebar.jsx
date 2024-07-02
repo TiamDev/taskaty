@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "./../../../assets/image/logo.png";
+import logo from "./../../../assets/image/Logo.svg";
 import pic from "./../../../assets/image/mochi-jolly-young-man-and-woman.png";
 import "./calender.css";
 import Calendar from "react-calendar";
@@ -42,7 +42,7 @@ const Sidebar = ({ user }) => {
             <button
               type="button"
               onClick={handleLogout}
-              className="btn btn-danger w-100"
+              className="btn btn-danger w-75"
             >
               <i className="bi bi-arrow-bar-left"></i> logout
             </button>

@@ -173,171 +173,160 @@ const TaskBoxHeader = ({ user }) => {
             New Task
           </Modal.Title>
         </Modal.Header>
-        <div className="row">
-          <div className="col-6">
-            <Modal.Body>
-              <div className="mt-2 ">
-                <label htmlFor="title">Title</label>
+        <Modal.Body>
+          <div className="mt-2 ">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              value={addTask.title}
+              onChange={(e) =>
+                setAddTask({ ...addTask, [e.target.name]: e.target.value })
+              }
+              name="title"
+              className="form-control"
+            />
+          </div>
+          <div className="mt-2">
+            <label htmlFor="description">Description</label>
+            <textarea
+              className="form-control"
+              name="description"
+              value={addTask.description}
+              onChange={(e) =>
+                setAddTask({ ...addTask, [e.target.name]: e.target.value })
+              }
+            ></textarea>
+          </div>
+          <div className="row mt-2">
+            <div className="col-lg-4 col-sm-12">
+              <div className="">
+                <label htmlFor="title">Date</label>
                 <input
-                  type="text"
-                  value={addTask.title}
-                  onChange={(e) =>
-                    setAddTask({ ...addTask, [e.target.name]: e.target.value })
-                  }
-                  name="title"
+                  type="date"
+                  name="date"
+                  value={addTask.date}
+                  onChange={(e) => {
+                    setAddTask({
+                      ...addTask,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
                   className="form-control"
                 />
               </div>
-              <div className="mt-2">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  className="form-control"
-                  name="description"
-                  value={addTask.description}
+            </div>
+            <div className="col-lg-4 col-sm-6">
+              <div className="">
+                <label htmlFor="title">Starts</label>
+                <input
+                  type="time"
+                  name="startTime"
+                  value={addTask.startTime}
                   onChange={(e) =>
-                    setAddTask({ ...addTask, [e.target.name]: e.target.value })
+                    setAddTask({
+                      ...addTask,
+                      [e.target.name]: e.target.value,
+                    })
                   }
-                ></textarea>
+                  className="form-control"
+                />
               </div>
-              <div className="row mt-2">
-                <div className="col-lg-4 col-sm-12">
-                  <div className="">
-                    <label htmlFor="title">Date</label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={addTask.date}
-                      onChange={(e) => {
-                        setAddTask({
-                          ...addTask,
-                          [e.target.name]: e.target.value,
-                        });
-                      }}
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-4 col-sm-6">
-                  <div className="">
-                    <label htmlFor="title">Starts</label>
-                    <input
-                      type="time"
-                      name="startTime"
-                      value={addTask.startTime}
-                      onChange={(e) =>
-                        setAddTask({
-                          ...addTask,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="col-lg-4 col-sm-6">
-                  <div className="">
-                    <label htmlFor="title">Endes</label>
-                    <input
-                      type="time"
-                      value={addTask.endTime}
-                      name="endTime"
-                      onChange={(e) =>
-                        setAddTask({
-                          ...addTask,
-                          [e.target.name]: e.target.value,
-                        })
-                      }
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <fieldset className="row mb-3 mt-2">
-                  <label className=" ">Priority</label>
-                  <div className="col-sm-10  mt-2">
-                    <div className="d-flex justify-content-between">
-                      <div
-                        className={`form-check  ${
-                          addTask.priority === "necessary"
-                            ? "border__success"
-                            : ""
-                        }`}
-                      >
-                        <label htmlFor="necessary">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name="priority"
-                            id="necessary"
-                            value="necessary"
-                            checked={addTask.priority === "necessary"}
-                            onChange={(e) =>
-                              setAddTask({
-                                ...addTask,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
-                          />
-                          Necessary
-                        </label>
-                      </div>
-                      <div
-                        className={`form-check ${
-                          addTask.priority === "important"
-                            ? "border__success"
-                            : ""
-                        }`}
-                      >
-                        <label htmlFor="important">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name="priority"
-                            id="important"
-                            value="important"
-                            checked={addTask.priority === "important"}
-                            onChange={(e) =>
-                              setAddTask({
-                                ...addTask,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
-                          />
-                          Important
-                        </label>
-                      </div>
-                      <div
-                        className={`form-check ${
-                          addTask.priority === "normal" ? "border__success" : ""
-                        }`}
-                      >
-                        <label htmlFor="normal">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name="priority"
-                            id="normal"
-                            value="normal"
-                            checked={addTask.priority === "normal"}
-                            onChange={(e) =>
-                              setAddTask({
-                                ...addTask,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
-                          />
-                          Normal
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+            </div>
+            <div className="col-lg-4 col-sm-6">
+              <div className="">
+                <label htmlFor="title">Endes</label>
+                <input
+                  type="time"
+                  value={addTask.endTime}
+                  name="endTime"
+                  onChange={(e) =>
+                    setAddTask({
+                      ...addTask,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                  className="form-control"
+                />
               </div>
-            </Modal.Body>
+            </div>
+            <fieldset className="row mb-3 mt-2">
+              <label className=" ">Priority</label>
+              <div className="col-sm-10  mt-2">
+                <div className="d-flex justify-content-between">
+                  <div
+                    className={`form-check  ${
+                      addTask.priority === "necessary" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="necessary">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="necessary"
+                        value="necessary"
+                        checked={addTask.priority === "necessary"}
+                        onChange={(e) =>
+                          setAddTask({
+                            ...addTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Necessary
+                    </label>
+                  </div>
+                  <div
+                    className={`form-check ${
+                      addTask.priority === "important" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="important">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="important"
+                        value="important"
+                        checked={addTask.priority === "important"}
+                        onChange={(e) =>
+                          setAddTask({
+                            ...addTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Important
+                    </label>
+                  </div>
+                  <div
+                    className={`form-check ${
+                      addTask.priority === "normal" ? "border__success" : ""
+                    }`}
+                  >
+                    <label htmlFor="normal">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="priority"
+                        id="normal"
+                        value="normal"
+                        checked={addTask.priority === "normal"}
+                        onChange={(e) =>
+                          setAddTask({
+                            ...addTask,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      Normal
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
           </div>
-          <div className="col-6">
-            <img src={image} width={"80rem"} className="me-3" alt="" />
-          </div>
-        </div>
+        </Modal.Body>
         <Modal.Footer>
           <Button
             onClick={handleAddTask}

@@ -18,8 +18,8 @@
   box-shadow: var(--shadow);
 }
 .logo {
-  width: 120px;
-  margin-block: -10px;
+  width: 141px;
+  margin-block: 33px;
 }
 .side-content {
   display: flex;

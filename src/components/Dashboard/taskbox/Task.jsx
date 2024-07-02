@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./taskbox.css";
 import image from "./../../../assets/image/mochi-post-it-notes (1).png";
+import image2 from "./../../../assets/image/mochi-exclamation-marks.png";
 
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Modal, Button } from "react-bootstrap";
@@ -322,9 +323,6 @@ const Task = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleEditClose} className="btn btn-secondary">
-            Close
-          </Button>
           <Button onClick={handleEditClick} className="btn btn-primary">
             Save changes
           </Button>
@@ -339,6 +337,7 @@ const Task = ({
       >
         <Modal.Header closeButton>
           <h1 className="modal-title fs-5" id="exampleModalLabel">
+            <img src={image2} width={"30rem"} className="me-3" alt="" />
             Delete Task
           </h1>
         </Modal.Header>
