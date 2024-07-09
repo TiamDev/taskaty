@@ -6,14 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Button, Modal } from "react-bootstrap";
 import { TypeContext } from "../../../contexts/TypeContext";
-import {
-  PriorityContext,
-  SearchContext,
-} from "../../../contexts/SearchContext";
+import { SearchContext } from "../../../contexts/SearchContext";
 const TaskBoxHeader = ({ user }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
   const [showAdd, setShowAdd] = useState(false);
-  const [date, setdate] = useState(new Date());
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -79,7 +75,12 @@ const TaskBoxHeader = ({ user }) => {
     setDisplayType(e);
   };
   const { setSearch } = useContext(SearchContext);
-
+  const btnDisabled =
+    addTask.title === "" ||
+    addTask.startTime === "" ||
+    addTask.endTime === "" ||
+    addTask.date === "" ||
+    addTask.priority === "";
   return (
     <>
       <div className="taskbox__header">
@@ -107,7 +108,7 @@ const TaskBoxHeader = ({ user }) => {
               </span>
             </div>
           </div>
-          <div className="col-5 d-flex">
+          <div className="col-4 d-flex">
             <div className="dropdown pe-3">
               <button
                 className="dropdown-toggle"
@@ -155,12 +156,12 @@ const TaskBoxHeader = ({ user }) => {
             </div>
           </div>
 
-          <div className="col-2 text-end">
+          <div className="col-3 text-end ">
             <Button
               className={"btn btn-primary btn-add"}
               onClick={handleAddShow}
             >
-              <i className="bi bi-plus-square-fill "></i>
+              <i className="bi bi-plus-square-fill "></i> <span>New Task</span>
             </Button>
           </div>
         </div>
@@ -330,13 +331,7 @@ const TaskBoxHeader = ({ user }) => {
         <Modal.Footer>
           <Button
             onClick={handleAddTask}
-            disabled={
-              addTask.title === "" ||
-              addTask.startTime === "" ||
-              addTask.endTime === "" ||
-              addTask.date === "" ||
-              addTask.priority === ""
-            }
+            disabled={btnDisabled}
             className="btn btn-primary"
           >
             Create New Task

@@ -1,4 +1,8 @@
-.taskbox {
+.btn-add {
+  text-wrap: nowrap;
+}
+.btn-add span {
+  display: inline-block;
 }
 .taskbox__header {
   position: fixed;
@@ -96,6 +100,7 @@ p {
   color: #595858;
   font-size: 16px;
   font-weight: 300;
+  text-wrap: pretty;
 }
 .card-body {
   padding: 10px 10px;
@@ -220,5 +225,11 @@ h5 {
   .taskbox__header {
     top: 15rem;
     left: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .btn-add span {
+    display: none;
   }
 }
