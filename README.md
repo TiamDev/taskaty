@@ -52,14 +52,10 @@ Taskaty is designed to help individuals and teams organize, track, and manage ta
 </div>
 
 <div align="center">
-  <img src="./src/assets/image/Taskaty/4.png" alt="Alt Text"  />
-</div>
-
-<div align="center">
-  <img src="./src/assets/image/Taskaty/5.png" alt="Alt Text"  />
+  <img src="./src/assets/image/Taskaty/bandicam 2024-07-10 04-44-22-301.jpg" alt="Alt Text"  />
 </div>
 <div align="center">
-  <img width="50%" src="./src/assets/image/Taskaty/10.png" alt="Alt Text"  />
+  <img  src="./src/assets/image/Taskaty/bandicam 2024-07-10 04-47-50-873.jpg" alt="Alt Text"  />
 </div>
 ## Technologies Used
 
