@@ -164,6 +164,13 @@ h5 {
   top: -18px;
   animation: pulse 0.5s 1;
 }
+.empty {
+  font-size: 18px;
+  font-weight: 700;
+  opacity: 0.3;
+  text-align: center;
+  color: #212121;
+}
 @keyframes pulse {
   0% {
     font-size: 12px;

@@ -55,10 +55,18 @@ const TaskBox = ({ user }) => {
         </div>
       );
     });
+  // const isEmpty =  "There are no tasks" : taskList;
   return (
     <>
       <TaskBoxHeader user={user}></TaskBoxHeader>
-      <div className="row scroller">{taskList}</div>
+
+      <div className="row scroller">
+        {taskList.length === 0 ? (
+          <p className="empty mt-4">There are no tasks</p>
+        ) : (
+          <div className="row scroller">{taskList}</div>
+        )}
+      </div>
     </>
   );
 };
