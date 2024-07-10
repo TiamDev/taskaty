@@ -72,7 +72,6 @@ const TaskBoxHeader = ({ user }) => {
     addTask.title === "" ||
     addTask.startTime === "" ||
     addTask.endTime === "" ||
-    // addTask.date === "" ||
     addTask.priority === "";
   return (
     <>

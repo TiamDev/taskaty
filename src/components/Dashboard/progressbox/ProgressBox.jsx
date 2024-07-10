@@ -59,7 +59,9 @@ const ProgressBox = ({ user }) => {
   const day =
     selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
   const completion =
-    UncompletedTasks.length === 0 ? " 0 🎉 " : UncompletedTasks.length;
+    UncompletedTasks.length === 0 && Tasks.length !== 0
+      ? "0 🎉 "
+      : UncompletedTasks.length;
   return (
     <>
       <div className="progress__container">

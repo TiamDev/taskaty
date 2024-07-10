@@ -218,10 +218,10 @@ h5 {
 }
 @media screen and (max-width: 1024px) {
   .scroller {
-    margin-top: 290px;
+    margin-top: 304px;
   }
   .taskbox__header {
-    top: 16rem;
+    top: 16.8rem;
     left: 20px;
   }
 }
