@@ -5,7 +5,7 @@ import "./progressbox.css";
 const Progress = ({
   progress,
   maxCompleted,
-  progressColor = "#000",
+  progressColor = "#f0e790",
   progressHeight,
 }) => {
   return (
@@ -17,6 +17,7 @@ const Progress = ({
       width={"100%"}
       labelClassName="label"
       bgColor={progressColor}
+      baseBgColor="#e0e0de3b"
     />
   );
 };

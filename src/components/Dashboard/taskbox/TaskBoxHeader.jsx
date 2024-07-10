@@ -11,19 +11,12 @@ const TaskBoxHeader = ({ user }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
   const [showAdd, setShowAdd] = useState(false);
 
-  const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
   const [addTask, setAddTask] = useState({
     title: "",
     description: "",
     startTime: "",
     endTime: "",
-    date: formatDate(new Date()),
+    date: new Date().toLocaleDateString(),
     priority: "necessary",
   });
 
@@ -51,7 +44,7 @@ const TaskBoxHeader = ({ user }) => {
       description: "",
       startTime: "",
       endTime: "",
-      date: "",
+      date: new Date().toLocaleDateString(),
       priority: "necessary",
     });
   };
@@ -79,17 +72,17 @@ const TaskBoxHeader = ({ user }) => {
     addTask.title === "" ||
     addTask.startTime === "" ||
     addTask.endTime === "" ||
-    addTask.date === "" ||
+    // addTask.date === "" ||
     addTask.priority === "";
   return (
     <>
       <div className="taskbox__header">
-        <div className="row">
+        {/* <div className="row">
           {" "}
           <div className="">
             <h1> Tasks</h1>
           </div>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-5">
             <div className="input-group mb-3">

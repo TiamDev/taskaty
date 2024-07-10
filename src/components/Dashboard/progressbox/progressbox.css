@@ -8,7 +8,8 @@
   z-index: 5;
 }
 .progressbox {
-  background-color: var(--second-color);
+  background-color: #000000e8;
+  color: whitesmoke;
   padding: var(--padding__medium);
   border-radius: var(--border-radius);
   margin-bottom: 10px;
@@ -23,8 +24,6 @@
 .progresses {
   display: flex;
   justify-content: start;
-  /* justify-content: space-between; */
-
   align-items: center;
   height: 100%;
 }
@@ -33,11 +32,8 @@
   padding: 0;
 }
 .selected__date {
-  color: rgb(242 242 242 / 45%);
+  color: rgb(113 113 113);
   margin-top: -5px;
-  /* padding-left: 5px; */
-  /* font-size: 20px; */
-  /* margin-bottom: 0; */
 }
 @media screen and (max-width: 1024px) {
   .progressbox {
@@ -47,9 +43,9 @@
 }
 .label {
   padding-right: 9px;
-  color: white;
+  color: #000;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .priority__prog {
@@ -83,13 +79,13 @@
 }
 .image {
   width: 5.5rem;
-  transform: rotate(36deg);
+  /* transform: rotate(36deg); */
 }
 @media screen and (max-width: 575px) {
   .image {
     width: 12.5vw;
     margin-left: -10px;
-    transform: scale(1.7) rotate(36deg);
+    transform: scale(1.3);
     margin-bottom: -52px;
   }
 }
@@ -106,15 +102,3 @@
     width: 80px;
   }
 }
-/* .col-xs-8 {
-  flex: 0 0 66.66666667%;
-  max-width: 66.66666667%;
-}
-.col-xs-4 {
-  flex: 0 0 33.33333333%;
-  max-width: 33.33333333%;
-}
-  */
-/* .d-xs-none {
-  display: none;
-} */

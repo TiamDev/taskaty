@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./progressbox.css";
 import Progress from "./Progress";
-import image from "./../../../assets/image/mochi-notebook.png";
+import image from "./../../../assets/image/mochi-woman-reading-a-book-or-novel.png";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { SelectedDateContext } from "../../../contexts/SelectedDate";
 import "react-circular-progressbar/dist/styles.css";
@@ -56,8 +56,10 @@ const ProgressBox = ({ user }) => {
   if (normalData > 0) {
     normal = (normalDatacompleted / normalData) * 100;
   }
-
-  // const taskLength = taskToBeRendered.length;
+  const day =
+    selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
+  const completion =
+    UncompletedTasks.length === 0 ? " 0 🎉 " : UncompletedTasks.length;
   return (
     <>
       <div className="progress__container">
@@ -67,7 +69,7 @@ const ProgressBox = ({ user }) => {
               <div className="row">
                 <div className="col-12">
                   <div className="progress__section row">
-                    <div className="col-lg-8 col-md-8 mb-2">
+                    <div className="col-lg-8 col-md-10 mb-2">
                       <div className="row">
                         <div className="col-2 ">
                           <img src={image} className="image" alt="" />
@@ -75,14 +77,12 @@ const ProgressBox = ({ user }) => {
                         <div className="col-10">
                           {" "}
                           <div className="daily">
-                            <h2 className="mb-0">Daily Tasks</h2>
+                            <h2 className="mb-0">{day} Tasks Progress</h2>
                             <h4 className="selected__date m-0">
-                              {selectedDate === new Date().toLocaleDateString()
-                                ? "Today"
-                                : selectedDate}
+                              Remaining : <strong>{completion}</strong>{" "}
                             </h4>
                             <p className="m-0 ps-1">
-                              Number of Tasks : <strong>{Tasks.length}</strong>{" "}
+                              All Tasks : {Tasks.length}
                             </p>
                             <div className="w-100">
                               <Progress
@@ -94,26 +94,7 @@ const ProgressBox = ({ user }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 mt-2 ">
-                      {/* <h4>
-                        General Tasks is <strong>{Tasks.length}</strong>{" "}
-                      </h4>
-                      <p></p>
-                      <div className=" progresses">
-                        <p className="">
-                          <i className="bi bi-flag-fill  pe-1 necessary"></i>{" "}
-                          {necessaryData} tasks
-                        </p>
-                        <p className="">
-                          <i className="bi bi-flag-fill  pe-1 important"></i>{" "}
-                          {importantData} tasks
-                        </p>
-                        <p className="">
-                          <i className="bi bi-flag-fill  pe-1 normal"></i>{" "}
-                          {normalData} tasks
-                        </p>
-                      </div> */}
-
+                    {/* <div className="col-lg-4 col-md-4 mt-2 ">
                       <div className="row progresses">
                         <div className="row ms-1 text-start"></div>
                         <div className="col-4 circular__progress">
@@ -123,7 +104,7 @@ const ProgressBox = ({ user }) => {
                               textSize: "16px",
                               pathColor: "#dc3545",
                               textColor: "black",
-                              trailColor: "#9eb0be",
+                              trailColor: "#e0e0de3b",
                             })}
                           >
                             <i className="bi bi-flag-fill  pe-1 necessary"></i>{" "}
@@ -139,7 +120,7 @@ const ProgressBox = ({ user }) => {
                               textSize: "16px",
                               pathColor: "#3655b3",
                               textColor: "black",
-                              trailColor: "#9eb0be",
+                              trailColor: "#e0e0de3b",
                             })}
                           >
                             <i className="bi bi-flag-fill  pe-1 important"></i>{" "}
@@ -155,7 +136,7 @@ const ProgressBox = ({ user }) => {
                               textSize: "16px",
                               pathColor: "#616060",
                               textColor: "black",
-                              trailColor: "#9eb0be",
+                              trailColor: "#e0e0de3b",
                             })}
                           >
                             <i className="bi bi-flag-fill  pe-1 normal"></i>{" "}
@@ -165,7 +146,7 @@ const ProgressBox = ({ user }) => {
                           </CircularProgressbarWithChildren>{" "}
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

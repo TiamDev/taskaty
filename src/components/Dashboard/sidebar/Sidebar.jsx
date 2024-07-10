@@ -14,10 +14,8 @@ import { useParams } from "react-router-dom";
 import { SelectedDateContext } from "../../../contexts/SelectedDate";
 const Sidebar = ({ user }) => {
   const [toggle, showMenu] = useState(false);
-  // const [calender, setCalender] = useState(new Date().toLocaleDateString());
   const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
   const navigat = useNavigate();
-  // const user = JSON.parse(localStorage.getItem("user"));
   const handleLogout = () => {
     localStorage.removeItem("loggedin");
     localStorage.removeItem("user");
@@ -42,7 +40,7 @@ const Sidebar = ({ user }) => {
             <button
               type="button"
               onClick={handleLogout}
-              className="btn btn-danger w-75"
+              className="btn btn-primary w-75"
             >
               <i className="bi bi-arrow-bar-left"></i> logout
             </button>
