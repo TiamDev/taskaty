@@ -96,7 +96,7 @@ const ProgressBox = ({ user }) => {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="col-lg-4 col-md-4 mt-2 ">
+                    <div className="col-lg-4 col-md-4 mt-2 ">
                       <div className="row progresses">
                         <div className="row ms-1 text-start"></div>
                         <div className="col-4 circular__progress">
@@ -136,7 +136,7 @@ const ProgressBox = ({ user }) => {
                             value={normal}
                             styles={buildStyles({
                               textSize: "16px",
-                              pathColor: "#616060",
+                              pathColor: "#ca62a9",
                               textColor: "black",
                               trailColor: "#e0e0de3b",
                             })}
@@ -148,7 +148,7 @@ const ProgressBox = ({ user }) => {
                           </CircularProgressbarWithChildren>{" "}
                         </div>
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>

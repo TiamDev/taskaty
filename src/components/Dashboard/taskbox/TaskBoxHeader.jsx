@@ -76,12 +76,6 @@ const TaskBoxHeader = ({ user }) => {
   return (
     <>
       <div className="taskbox__header">
-        {/* <div className="row">
-          {" "}
-          <div className="">
-            <h1> Tasks</h1>
-          </div>
-        </div> */}
         <div className="row">
           <div className="col-5">
             <div className="input-group mb-3">
@@ -103,7 +97,7 @@ const TaskBoxHeader = ({ user }) => {
           <div className="col-4 d-flex">
             <div className="dropdown pe-3">
               <button
-                className="dropdown-toggle"
+                className="dropdown-toggle type-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"

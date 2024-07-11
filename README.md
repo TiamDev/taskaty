@@ -50,13 +50,13 @@ Taskaty is designed to help individuals and teams organize, track, and manage ta
 <div align="center">
   <img src="./src/assets/image/Taskaty/2.png" alt="Alt Text"  />
 </div>
+<div align="center">
+  <img  src="./src/assets/image/Taskaty/bandicam 2024-07-11 22-34-44-603.jpg" alt="Alt Text"  />
+</div>
+<div align="center">
+  <img src="./src/assets/image/Taskaty/bandicam 2024-07-11 22-18-39-714.jpg" alt="Alt Text"  />
+</div>
 
-<div align="center">
-  <img src="./src/assets/image/Taskaty/bandicam 2024-07-10 04-44-22-301.jpg" alt="Alt Text"  />
-</div>
-<div align="center">
-  <img  src="./src/assets/image/Taskaty/bandicam 2024-07-10 04-47-50-873.jpg" alt="Alt Text"  />
-</div>
 ## Technologies Used
 
 - React.js

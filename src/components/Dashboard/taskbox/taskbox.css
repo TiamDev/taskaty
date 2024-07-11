@@ -128,7 +128,7 @@ p {
 h5 {
   display: inline-block;
   text-wrap: wrap;
-  margin-left: 18px;
+  margin-left: 22px;
 }
 
 .menu-box .dropdown-toggle {
@@ -150,19 +150,22 @@ h5 {
 }
 .done-box {
   position: absolute;
-  border: 2px solid black;
+  border: 3.5px solid var(--first-color);
   display: inline-block;
-  height: 12px;
-  width: 12px;
+  height: 17px;
+  width: 17px;
   top: 17px;
+  border-radius: 3px;
 }
 .checked .done::before {
   position: absolute;
   content: "✓";
-  font-size: 24px;
-  right: -6px;
-  top: -18px;
+  font-size: 21px;
+  right: -4px;
+  font-weight: 900;
+  top: -13px;
   animation: pulse 0.5s 1;
+  transform: rotate(7deg);
 }
 .empty {
   font-size: 18px;
@@ -170,6 +173,21 @@ h5 {
   opacity: 0.3;
   text-align: center;
   color: #212121;
+}
+.type-btn {
+  background-color: #f2f1f5f2;
+  border-radius: 5px;
+  height: 37px;
+  width: 132px;
+  direction: rtl;
+  padding: 2px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dropdown-toggle::after {
+  margin-right: 0.2em;
+  margin-left: 0.2em;
 }
 @keyframes pulse {
   0% {
