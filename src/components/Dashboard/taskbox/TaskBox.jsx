@@ -55,7 +55,6 @@ const TaskBox = ({ user }) => {
         </div>
       );
     });
-  // const isEmpty =  "There are no tasks" : taskList;
   return (
     <>
       <TaskBoxHeader user={user}></TaskBoxHeader>

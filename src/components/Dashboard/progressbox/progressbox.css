@@ -8,7 +8,9 @@
   z-index: 5;
 }
 .progressbox {
-  background-color: #000000e8;
+  /* background-color: #000000e8; */
+  background-image: url("./../../../assets/image/Animated\ Shape\ \(3\).svg");
+  background-size: cover;
   color: whitesmoke;
   padding: var(--padding__medium);
   border-radius: var(--border-radius);

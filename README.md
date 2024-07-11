@@ -4,7 +4,7 @@
   <img src="./src/assets/image/Logo.svg" width="50%" alt="Alt Text"  />
     <img src="./src/assets/image/logo2.svg" width="50%" alt="Alt Text"  />
 </div>
-Taskaty is designed to help individuals and teams organize, track, and manage tasks and activities related to project management and goal achievement. The system provides a user-friendly interface for creating, assigning, and tracking tasks, as well as setting deadlines and monitoring progress..
+Taskaty is designed to help individuals and teams organize, track, and manage tasks and activities related to project management and goal achievement. The system provides a user-friendly interface for creating, assigning, and tracking tasks, as well as setting deadlines and monitoring progress.
 
 ## Contents
 
