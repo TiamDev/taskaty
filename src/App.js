@@ -1,7 +1,6 @@
 import "./App";
 import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-// import $ from "jquery";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Signin from "./components/Account/Signin";
@@ -11,6 +10,7 @@ import { UserContext } from "./contexts/UserContext";
 import ProtectedRoutes from "./Services/ProtectedRoutes";
 import { useState } from "react";
 import { UserData } from "./Data/Users";
+import NotFound from "./components/NotFound";
 
 function App() {
   // let UserData = [];
@@ -24,6 +24,8 @@ function App() {
     <UserContext.Provider value={{ userData, createUser }}>
       <div className="App">
         <Routes>
+          <Route path="*" element={<NotFound />} />
+
           <Route path="/" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<ProtectedRoutes />}>

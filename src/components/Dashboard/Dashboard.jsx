@@ -12,6 +12,7 @@ import { useContext, useState } from "react";
 
 import { Tasks } from "../../Data/Tasks";
 import { useLocation } from "react-router-dom";
+import NotFound from "../NotFound";
 function App() {
   const [displayType, setDisplayType] = useState("all");
   const [taskData, setTaskData] = useState(Tasks);
@@ -26,25 +27,29 @@ function App() {
   const user = usersStorage.find((u) => {
     return u.id === user_id.state;
   });
-  return (
-    <>
-      <SelectedDateContext.Provider value={{ selectedDate, setSelectedDate }}>
-        <TypeContext.Provider value={{ displayType, setDisplayType }}>
-          <TaskContext.Provider value={{ taskData, setTaskData }}>
-            <div className="dashboard">
-              <Sidebar user={user.username}></Sidebar>
-              <div className="content">
-                <ProgressBox user={user.id}></ProgressBox>
-                <SearchContext.Provider value={{ search, setSearch }}>
-                  <TaskBox user={user.id}></TaskBox>
-                </SearchContext.Provider>
+  if (user) {
+    return (
+      <>
+        <SelectedDateContext.Provider value={{ selectedDate, setSelectedDate }}>
+          <TypeContext.Provider value={{ displayType, setDisplayType }}>
+            <TaskContext.Provider value={{ taskData, setTaskData }}>
+              <div className="dashboard">
+                <Sidebar user={user.username}></Sidebar>
+                <div className="content">
+                  <ProgressBox user={user.id}></ProgressBox>
+                  <SearchContext.Provider value={{ search, setSearch }}>
+                    <TaskBox user={user.id}></TaskBox>
+                  </SearchContext.Provider>
+                </div>
               </div>
-            </div>
-          </TaskContext.Provider>
-        </TypeContext.Provider>
-      </SelectedDateContext.Provider>
-    </>
-  );
+            </TaskContext.Provider>
+          </TypeContext.Provider>
+        </SelectedDateContext.Provider>
+      </>
+    );
+  } else {
+    return <NotFound></NotFound>;
+  }
 }
 
 export default App;

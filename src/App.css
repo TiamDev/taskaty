@@ -11,6 +11,21 @@
   margin-left: 270px;
   transition: all 0.3s ease-in-out;
 }
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-container img {
+  width: 20rem;
+}
+.not-found {
+  /* width: 100vw; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 @media screen and (max-width: 1024px) {
   .content {
     margin-left: 0px;
