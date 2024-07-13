@@ -56,8 +56,8 @@ const ProgressBox = ({ user }) => {
   if (normalData > 0) {
     normal = (normalDatacompleted / normalData) * 100;
   }
-  const day =
-    selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
+  // const day =
+  //   selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
   const completion =
     UncompletedTasks.length === 0 && Tasks.length !== 0
       ? "0 🎉 "
@@ -79,7 +79,7 @@ const ProgressBox = ({ user }) => {
                         <div className="col-10">
                           {" "}
                           <div className="daily">
-                            <h2 className="mb-0">{day} Tasks Progress</h2>
+                            {/* <h2 className="mb-0">{day} Tasks Progress</h2> */}
                             <h4 className="selected__date m-0">
                               Remaining : <strong>{completion}</strong>{" "}
                             </h4>

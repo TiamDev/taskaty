@@ -36,13 +36,12 @@ const Sidebar = ({ user }) => {
           />
           <div className={"profile center"}>
             <img src={pic} alt="" />
-            <p> Hi, {user}</p>
             <button
               type="button"
               onClick={handleLogout}
-              className="btn btn-primary w-75"
+              className="btn btn-primary w-75 mt-5"
             >
-              <i className="bi bi-arrow-bar-left"></i> logout
+              <i className="bi bi-arrow-bar-left "></i> logout
             </button>
           </div>
         </div>

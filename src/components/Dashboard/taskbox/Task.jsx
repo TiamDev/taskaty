@@ -8,7 +8,6 @@ import { Modal, Button } from "react-bootstrap";
 const Task = ({
   id,
   title = "task title",
-  description = "description",
   date,
   startTime,
   endTime,
@@ -18,7 +17,6 @@ const Task = ({
   const { taskData, setTaskData } = useContext(TaskContext);
   const [editTask, setEditTask] = useState({
     title: title,
-    description: description,
     startTime: startTime,
     date: date,
     endTime: endTime,
@@ -53,7 +51,6 @@ const Task = ({
         return {
           ...task,
           title: editTask.title,
-          description: editTask.description,
           date: editTask.date,
           priority: editTask.priority,
           startTime: editTask.startTime,
@@ -140,7 +137,6 @@ const Task = ({
             {title}
           </h5>
 
-          <h6 className="card-text">{description}</h6>
           <div className="row">
             <span className={`priority ${priority}`}>
               <i className="bi bi-flag-fill  pe-1"></i>
@@ -181,17 +177,7 @@ const Task = ({
               className="form-control"
             />
           </div>
-          <div className="mt-2">
-            <label htmlFor="title">Description</label>
-            <textarea
-              className="form-control"
-              value={editTask.description}
-              name="description"
-              onChange={(e) =>
-                setEditTask({ ...editTask, [e.target.name]: e.target.value })
-              }
-            ></textarea>
-          </div>
+
           <div className="row">
             <div className="col-lg-4 col-sm-12">
               <div className="">

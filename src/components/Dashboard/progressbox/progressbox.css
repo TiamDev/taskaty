@@ -19,7 +19,7 @@
   box-shadow: 0px 5px 5px 0px rgba(26, 25, 37, 0.241);
   position: fixed;
   right: 20px;
-  top: 20px;
+  top: 70px;
   left: 290px;
   z-index: 10;
 }
@@ -80,7 +80,7 @@
   position: relative;
 }
 .image {
-  width: 5.5rem;
+  width: 4rem;
   /* transform: rotate(36deg); */
 }
 @media screen and (max-width: 575px) {

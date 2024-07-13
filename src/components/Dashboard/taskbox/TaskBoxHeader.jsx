@@ -13,7 +13,6 @@ const TaskBoxHeader = ({ user }) => {
 
   const [addTask, setAddTask] = useState({
     title: "",
-    description: "",
     startTime: "",
     endTime: "",
     date: new Date().toLocaleDateString(),
@@ -28,8 +27,6 @@ const TaskBoxHeader = ({ user }) => {
       user_id: user,
       isComplete: false,
       title: addTask.title,
-      description:
-        addTask.description == "" ? "no description" : addTask.description,
       startTime: addTask.startTime,
       endTime: addTask.endTime,
       date: new Date(addTask.date).toLocaleDateString(),
@@ -41,7 +38,6 @@ const TaskBoxHeader = ({ user }) => {
     handleAddClose();
     setAddTask({
       title: "",
-      description: "",
       startTime: "",
       endTime: "",
       date: new Date().toLocaleDateString(),
@@ -173,17 +169,7 @@ const TaskBoxHeader = ({ user }) => {
               className="form-control"
             />
           </div>
-          <div className="mt-2">
-            <label htmlFor="description">Description</label>
-            <textarea
-              className="form-control"
-              name="description"
-              value={addTask.description}
-              onChange={(e) =>
-                setAddTask({ ...addTask, [e.target.name]: e.target.value })
-              }
-            ></textarea>
-          </div>
+
           <div className="row mt-2">
             <div className="col-lg-4 col-sm-12">
               <div className="">
