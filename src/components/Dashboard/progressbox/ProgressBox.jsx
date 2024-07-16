@@ -59,96 +59,84 @@ const ProgressBox = ({ user }) => {
   const day =
     selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
   const completion =
-    UncompletedTasks.length === 0 && Tasks.length !== 0
-      ? "0 🎉 "
-      : UncompletedTasks.length;
+    Tasks.length === 0
+      ? ""
+      : UncompletedTasks.length === 0
+      ? ", all tasks have been completed. "
+      : ` and  ${UncompletedTasks.length} incomplete tasks.`;
   return (
-    <>
-      <div className="progress__container">
-        <div className="progressbox">
-          <div className="row ">
-            <div className="col-12">
-              <div className="row">
-                <div className="col-12">
-                  <div className="progress__section row">
-                    <div className="col-lg-8 col-md-10 mb-2">
-                      <div className="row">
-                        <div className="col-2 ">
-                          <img src={image} className="image" alt="" />
-                        </div>
-                        <div className="col-10">
-                          {" "}
-                          <div className="daily">
-                            <h2 className="mb-0">{day} Tasks Progress</h2>
-                            <h4 className="selected__date m-0">
-                              Remaining : <strong>{completion}</strong>{" "}
-                            </h4>
-                            <p className="m-0 ps-1">
-                              All Tasks : {Tasks.length}
-                            </p>
-                            <div className="w-100">
-                              <Progress
-                                progress={CompletedTasks.length}
-                                maxCompleted={Tasks.length}
-                              ></Progress>
-                            </div>
-                          </div>
-                        </div>
+    <div className="progress__container">
+      <div className="progressbox">
+        <div className="row">
+          <div className=" col-lg-2 col-sm-2 col-xs-12 d-lg-block  ">
+            <img src={image} className="image" alt="" />
+          </div>
+          <div className="col-lg-10 col-sm-10 col-xs-12">
+            <div className="progress__section row">
+              <div className="col-lg-7 col-md-12 mb-2">
+                <div className="daily">
+                  <h5 className="selected__date ms-0">
+                    {day} you have <strong>{Tasks.length} tasks </strong>
+                    {completion}
+                  </h5>
+                  <div className="w-100">
+                    <Progress
+                      progress={CompletedTasks.length}
+                      maxCompleted={Tasks.length}
+                    ></Progress>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-5 col-md-12 mt-2 ">
+                <div className="row progresses">
+                  <div className="row ms-1 text-start"></div>
+                  <div className="col-4 circular__progress">
+                    <CircularProgressbarWithChildren
+                      value={necessary}
+                      styles={buildStyles({
+                        textSize: "16px",
+                        pathColor: "#dc3545",
+                        textColor: "black",
+                        trailColor: "#e0e0de3b",
+                      })}
+                    >
+                      <i className="bi bi-flag-fill  pe-1 necessary"></i>{" "}
+                      <div style={{ fontSize: 12, marginTop: -5 }}>
+                        <strong>{necessaryData}</strong> tasks
                       </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 mt-2 ">
-                      <div className="row progresses">
-                        <div className="row ms-1 text-start"></div>
-                        <div className="col-4 circular__progress">
-                          <CircularProgressbarWithChildren
-                            value={necessary}
-                            styles={buildStyles({
-                              textSize: "16px",
-                              pathColor: "#dc3545",
-                              textColor: "black",
-                              trailColor: "#e0e0de3b",
-                            })}
-                          >
-                            <i className="bi bi-flag-fill  pe-1 necessary"></i>{" "}
-                            <div style={{ fontSize: 12, marginTop: -5 }}>
-                              <strong>{necessaryData}</strong> tasks
-                            </div>
-                          </CircularProgressbarWithChildren>
-                        </div>
-                        <div className="col-4 circular__progress">
-                          <CircularProgressbarWithChildren
-                            value={important}
-                            styles={buildStyles({
-                              textSize: "16px",
-                              pathColor: "#3655b3",
-                              textColor: "black",
-                              trailColor: "#e0e0de3b",
-                            })}
-                          >
-                            <i className="bi bi-flag-fill  pe-1 important"></i>{" "}
-                            <div style={{ fontSize: 12, marginTop: -5 }}>
-                              <strong>{importantData}</strong> tasks
-                            </div>
-                          </CircularProgressbarWithChildren>
-                        </div>
-                        <div className="col-4 circular__progress">
-                          <CircularProgressbarWithChildren
-                            value={normal}
-                            styles={buildStyles({
-                              textSize: "16px",
-                              pathColor: "#ca62a9",
-                              textColor: "black",
-                              trailColor: "#e0e0de3b",
-                            })}
-                          >
-                            <i className="bi bi-flag-fill  pe-1 normal"></i>{" "}
-                            <div style={{ fontSize: 12, marginTop: -5 }}>
-                              <strong>{normalData}</strong> tasks
-                            </div>
-                          </CircularProgressbarWithChildren>{" "}
-                        </div>
+                    </CircularProgressbarWithChildren>
+                  </div>
+                  <div className="col-4 circular__progress">
+                    <CircularProgressbarWithChildren
+                      value={important}
+                      styles={buildStyles({
+                        textSize: "16px",
+                        pathColor: "#3655b3",
+                        textColor: "black",
+                        trailColor: "#e0e0de3b",
+                      })}
+                    >
+                      <i className="bi bi-flag-fill  pe-1 important"></i>{" "}
+                      <div style={{ fontSize: 12, marginTop: -5 }}>
+                        <strong>{importantData}</strong> tasks
                       </div>
-                    </div>
+                    </CircularProgressbarWithChildren>
+                  </div>
+                  <div className="col-4 circular__progress">
+                    <CircularProgressbarWithChildren
+                      value={normal}
+                      styles={buildStyles({
+                        textSize: "16px",
+                        pathColor: "#ca62a9",
+                        textColor: "black",
+                        trailColor: "#e0e0de3b",
+                      })}
+                    >
+                      <i className="bi bi-flag-fill  pe-1 normal"></i>{" "}
+                      <div style={{ fontSize: 12, marginTop: -5 }}>
+                        <strong>{normalData}</strong> tasks
+                      </div>
+                    </CircularProgressbarWithChildren>{" "}
                   </div>
                 </div>
               </div>
@@ -156,7 +144,7 @@ const ProgressBox = ({ user }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default ProgressBox;

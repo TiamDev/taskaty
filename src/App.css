@@ -7,9 +7,35 @@
 .dashboard {
   padding: 20px;
 }
+.user-info {
+  position: fixed;
+  z-index: 10;
+  right: 22px;
+  left: 300px;
+  top: 20px;
+}
+
+.day-name {
+  color: gray;
+  margin-top: -6px;
+  padding-right: 2px;
+}
 .content {
   margin-left: 270px;
   transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 1024px) {
+  .user-info {
+    left: 75px;
+    top: 25px;
+  }
+  .user-info h4 {
+    font-size: medium;
+  }
+  .day-name {
+    font-size: small;
+    margin-top: -3px;
+  }
 }
 .image-container {
   display: flex;

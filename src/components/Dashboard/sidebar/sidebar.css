@@ -41,6 +41,7 @@
 }
 .profile img {
   width: 15vh;
+  margin-bottom: 5vh;
 }
 .nav__toggle {
   position: fixed;
@@ -66,7 +67,7 @@
     z-index: 100;
   }
   .nav__toggle-open {
-    left: 280px;
+    left: 265px;
   }
   .show-menu {
     left: 10px;

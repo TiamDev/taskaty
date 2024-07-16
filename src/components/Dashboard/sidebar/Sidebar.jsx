@@ -7,10 +7,9 @@ import "./sidebar.css";
 
 // import Calendar from "./Calendar";
 
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
 import { SelectedDateContext } from "../../../contexts/SelectedDate";
 const Sidebar = ({ user }) => {
   const [toggle, showMenu] = useState(false);
@@ -36,7 +35,6 @@ const Sidebar = ({ user }) => {
           />
           <div className={"profile center"}>
             <img src={pic} alt="" />
-            <p> Hi, {user}</p>
             <button
               type="button"
               onClick={handleLogout}

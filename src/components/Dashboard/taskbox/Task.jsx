@@ -139,19 +139,21 @@ const Task = ({
             />
             {title}
           </h5>
-
-          <h6 className="card-text">{description}</h6>
-          <div className="row">
-            <span className={`priority ${priority}`}>
-              <i className="bi bi-flag-fill  pe-1"></i>
-              {priority}
-            </span>
-          </div>
-          <div className="row">
-            <span className="col time">
-              {convertTo12HourFormat(startTime)} -{" "}
-              {convertTo12HourFormat(endTime)}
-            </span>
+          <div className=" ps-4">
+            {" "}
+            <h6 className="card-text">{description}</h6>
+            <div className="row">
+              <span className={`priority ${priority}`}>
+                <i className="bi bi-flag-fill  pe-1"></i>
+                {priority}
+              </span>
+            </div>
+            <div className="row">
+              <span className="col time">
+                {convertTo12HourFormat(startTime)} -{" "}
+                {convertTo12HourFormat(endTime)}
+              </span>
+            </div>
           </div>
         </div>
       </div>
