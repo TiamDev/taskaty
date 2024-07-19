@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./taskbox.css";
 import image from "./../../../assets/image/mochi-post-it-notes (1).png";
 import image2 from "./../../../assets/image/mochi-exclamation-marks.png";
@@ -30,23 +30,18 @@ const Task = ({
   const handleDeleteClose = () => setShowDelete(false);
   const handleEditShow = () => setShowEdit(true);
   const handleDeleteShow = () => setShowDelete(true);
-  // useEffect(() => {
-  //   const storageTasks = JSON.parse(localStorage.getItem("tasks"));
-  //   setTaskData(storageTasks);
-  // }, []);
-
   const handleCheckClick = () => {
-    const updatedTaskData = taskData.map((task) => {
+    const updatedTasks = taskData.map((task) => {
       if (task.id === id) {
         task.isComplete = !task.isComplete;
       }
       return task;
     });
-    setTaskData(updatedTaskData);
-    localStorage.setItem("tasks", JSON.stringify(updatedTaskData));
+    setTaskData(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
   const handleEditClick = () => {
-    const updatedTasksData = taskData.map((task) => {
+    const updatedTasks = taskData.map((task) => {
       if (task.id === id) {
         return {
           ...task,
@@ -60,18 +55,18 @@ const Task = ({
       }
       return task;
     });
-    setTaskData(updatedTasksData);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasksData));
+    setTaskData(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
     handleEditClose();
   };
   const handleDeleteClick = () => {
-    const updatedTasksData = taskData.filter((task) => {
+    const updatedTasks = taskData.filter((task) => {
       return task.id !== id;
     });
     handleDeleteClose();
-    setTaskData(updatedTasksData);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasksData));
+    setTaskData(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
   function convertTo12HourFormat(time24) {
     let [hours, minutes] = time24.split(":");
@@ -132,7 +127,7 @@ const Task = ({
               name="check"
               id="check"
               checked={isComplete}
-              // onChange={() => {}}
+              onChange={() => {}}
               style={{ display: "none" }}
             />
             {title}

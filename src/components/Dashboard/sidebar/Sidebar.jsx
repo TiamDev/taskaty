@@ -37,7 +37,6 @@ const Sidebar = ({ user }) => {
           <Calendar
             onClickDay={(e) => {
               setSelectedDate(e.toLocaleDateString());
-              console.log(user);
             }}
             value={selectedDate}
           />

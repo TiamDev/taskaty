@@ -3,17 +3,17 @@ import "./taskbox.css";
 import TaskBoxHeader from "./TaskBoxHeader";
 import Task from "./Task";
 import { TaskContext } from "../../../contexts/TaskContext";
-import { TypeContext } from "../../../contexts/TypeContext";
-
 import { SelectedDateContext } from "../../../contexts/SelectedDate";
 import { SearchContext } from "../../../contexts/SearchContext";
 
 const TaskBox = ({ user }) => {
   const { selectedDate } = useContext(SelectedDateContext);
-  const { displayType } = useContext(TypeContext);
   const { search, setSearch } = useContext(SearchContext);
-
   const { taskData } = useContext(TaskContext);
+  const [displayType, setDisplayType] = useState("all");
+  const changeDisplayType = (e) => {
+    setDisplayType(e);
+  };
   const completedTask = taskData.filter((task) => {
     return task.isComplete && task.date == selectedDate && task.user_id == user;
   });
@@ -60,7 +60,11 @@ const TaskBox = ({ user }) => {
     });
   return (
     <>
-      <TaskBoxHeader user={user}></TaskBoxHeader>
+      <TaskBoxHeader
+        user={user}
+        displayType={displayType}
+        setType={changeDisplayType}
+      ></TaskBoxHeader>
       {taskList.length === 0 ? (
         <div className="row scroller">
           <p className="empty">There are no tasks</p>

@@ -5,12 +5,13 @@ import image from "./../../../assets/image/mochi-confused-thoughts-icon.png";
 import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Button, Modal } from "react-bootstrap";
-import { TypeContext } from "../../../contexts/TypeContext";
 import { SearchContext } from "../../../contexts/SearchContext";
-const TaskBoxHeader = ({ user }) => {
+const TaskBoxHeader = ({ user, displayType, setType }) => {
+  const changeDisplayType = (e) => {
+    setType(e);
+  };
   const { taskData, setTaskData } = useContext(TaskContext);
   const [showAdd, setShowAdd] = useState(false);
-
   const [addTask, setAddTask] = useState({
     title: "",
     description: "",
@@ -35,9 +36,9 @@ const TaskBoxHeader = ({ user }) => {
       date: new Date(addTask.date).toLocaleDateString(),
       priority: addTask.priority,
     };
-    const createTask = [...taskData, newTask];
-    setTaskData(createTask);
-    localStorage.setItem("tasks", JSON.stringify(createTask));
+    const updatedTasks = [...taskData, newTask];
+    setTaskData(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     handleAddClose();
     setAddTask({
       title: "",
@@ -49,24 +50,20 @@ const TaskBoxHeader = ({ user }) => {
     });
   };
   useEffect(() => {
-    const storageTask = localStorage.getItem("tasks");
-    if (storageTask) {
+    const storageTasks = localStorage.getItem("tasks");
+    if (storageTasks) {
       try {
-        const storageTodo = JSON.parse(storageTask);
-        setTaskData(storageTodo);
+        const Tasks = JSON.parse(storageTasks);
+        setTaskData(Tasks);
       } catch (error) {
-        console.error("Error parsing localStorage data:", error);
+        // console.error("Error parsing localStorage data:", error);
         setTaskData([]);
       }
     } else {
       setTaskData([]);
     }
   }, []);
-  const { displayType, setDisplayType } = useContext(TypeContext);
 
-  const changeDisplyType = (e) => {
-    setDisplayType(e);
-  };
   const { setSearch } = useContext(SearchContext);
   const btnDisabled =
     addTask.title === "" ||
@@ -110,7 +107,7 @@ const TaskBoxHeader = ({ user }) => {
                     className="dropdown__btn"
                     value={"all"}
                     onClick={(e) => {
-                      changeDisplyType(e.target.value);
+                      changeDisplayType(e.target.value);
                     }}
                   >
                     all
@@ -121,7 +118,7 @@ const TaskBoxHeader = ({ user }) => {
                     className="dropdown__btn"
                     value={"Completed"}
                     onClick={(e) => {
-                      changeDisplyType(e.target.value);
+                      changeDisplayType(e.target.value);
                     }}
                   >
                     Completed
@@ -132,7 +129,7 @@ const TaskBoxHeader = ({ user }) => {
                     className="dropdown__btn"
                     value={"Uncompleted"}
                     onClick={(e) => {
-                      changeDisplyType(e.target.value);
+                      changeDisplayType(e.target.value);
                     }}
                   >
                     Uncompleted

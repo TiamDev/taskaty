@@ -3,17 +3,15 @@ import "./../../App.css";
 import Sidebar from "./sidebar/Sidebar";
 import TaskBox from "./taskbox/TaskBox";
 import ProgressBox from "./progressbox/ProgressBox";
+import NotFound from "../NotFound";
 
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import { TaskContext } from "../../contexts/TaskContext";
 import { SearchContext } from "../../contexts/SearchContext";
-import { TypeContext } from "../../contexts/TypeContext";
 import { SelectedDateContext } from "../../contexts/SelectedDate";
-
-import { useLocation } from "react-router-dom";
-import NotFound from "../NotFound";
 function App() {
-  const [displayType, setDisplayType] = useState("all");
   const [taskData, setTaskData] = useState([]);
   const [search, setSearch] = useState("");
   const [date] = useState(new Date().toLocaleDateString());
@@ -55,32 +53,30 @@ function App() {
     return (
       <>
         <SelectedDateContext.Provider value={{ selectedDate, setSelectedDate }}>
-          <TypeContext.Provider value={{ displayType, setDisplayType }}>
-            <TaskContext.Provider value={{ taskData, setTaskData }}>
-              <div className="dashboard">
-                <Sidebar user={user}></Sidebar>
-                <div className="content">
-                  <div className="row user-info">
-                    <div className="col-6">
-                      <h4 className="mt-1">Hi, {user.username}</h4>
-                    </div>
-                    <div className="col-6 text-end">
-                      <div className="time-info">
-                        <h4 className="m-0">
-                          <strong>{formattedDate}</strong>
-                        </h4>
-                        <p className="day-name">{dayName}</p>
-                      </div>
+          <TaskContext.Provider value={{ taskData, setTaskData }}>
+            <div className="dashboard">
+              <Sidebar user={user}></Sidebar>
+              <div className="content">
+                <div className="row user-info">
+                  <div className="col-6">
+                    <h4 className="mt-1">Hi, {user.username}</h4>
+                  </div>
+                  <div className="col-6 text-end">
+                    <div className="time-info">
+                      <h4 className="m-0">
+                        <strong>{formattedDate}</strong>
+                      </h4>
+                      <p className="day-name">{dayName}</p>
                     </div>
                   </div>
-                  <ProgressBox user={user.id}></ProgressBox>
-                  <SearchContext.Provider value={{ search, setSearch }}>
-                    <TaskBox user={user.id}></TaskBox>
-                  </SearchContext.Provider>
                 </div>
+                <ProgressBox user={user.id}></ProgressBox>
+                <SearchContext.Provider value={{ search, setSearch }}>
+                  <TaskBox user={user.id}></TaskBox>
+                </SearchContext.Provider>
               </div>
-            </TaskContext.Provider>
-          </TypeContext.Provider>
+            </div>
+          </TaskContext.Provider>
         </SelectedDateContext.Provider>
       </>
     );
