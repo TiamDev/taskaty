@@ -1,13 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./account.css";
 import logo from "./../../assets/image/Logo.svg";
 import image from "./../../assets/image/mochi-young-man-or-teenager-skateboarding.png";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const Signup = () => {
-  // const { userData, createUser } = useContext(UserContext);
   const [error, setError] = useState("");
 
   const [input, setInput] = useState({
@@ -35,6 +33,7 @@ const Signup = () => {
       username: input.username,
       email: input.email,
       password: input.password,
+      loggedin: false,
     };
 
     // createUser(newUser);

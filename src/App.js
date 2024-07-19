@@ -9,14 +9,10 @@ import { Route, Routes } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext";
 import ProtectedRoutes from "./Services/ProtectedRoutes";
 import { useState } from "react";
-import { UserData } from "./Data/Users";
 import NotFound from "./components/NotFound";
 
 function App() {
-  // let UserData = [];
-
-  const [userData, setUserData] = useState(UserData);
-
+  const [userData, setUserData] = useState([]);
   const createUser = (newUser) => {
     setUserData([...userData, newUser]);
   };

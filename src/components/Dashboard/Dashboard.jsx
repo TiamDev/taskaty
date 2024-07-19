@@ -4,18 +4,17 @@ import Sidebar from "./sidebar/Sidebar";
 import TaskBox from "./taskbox/TaskBox";
 import ProgressBox from "./progressbox/ProgressBox";
 
+import { useState } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { SearchContext } from "../../contexts/SearchContext";
 import { TypeContext } from "../../contexts/TypeContext";
 import { SelectedDateContext } from "../../contexts/SelectedDate";
-import { useContext, useState } from "react";
 
-import { Tasks } from "../../Data/Tasks";
 import { useLocation } from "react-router-dom";
 import NotFound from "../NotFound";
 function App() {
   const [displayType, setDisplayType] = useState("all");
-  const [taskData, setTaskData] = useState(Tasks);
+  const [taskData, setTaskData] = useState([]);
   const [search, setSearch] = useState("");
   const [date] = useState(new Date().toLocaleDateString());
   const [selectedDate, setSelectedDate] = useState(date);
@@ -59,7 +58,7 @@ function App() {
           <TypeContext.Provider value={{ displayType, setDisplayType }}>
             <TaskContext.Provider value={{ taskData, setTaskData }}>
               <div className="dashboard">
-                <Sidebar user={user.username}></Sidebar>
+                <Sidebar user={user}></Sidebar>
                 <div className="content">
                   <div className="row user-info">
                     <div className="col-6">

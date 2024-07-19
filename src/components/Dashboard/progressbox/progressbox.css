@@ -9,6 +9,7 @@
 }
 .progressbox {
   background-image: url("./../../../assets/image/Animated\ Shape\ \(3\).svg");
+  background-color: #141414;
   background-size: cover;
   color: whitesmoke;
   padding: var(--padding__medium);

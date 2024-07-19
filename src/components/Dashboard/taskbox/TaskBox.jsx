@@ -40,7 +40,10 @@ const TaskBox = ({ user }) => {
     })
     .map((task) => {
       return (
-        <div className="col-lg-6 col-md-9 col-sm-12 taskbox " key={task.id}>
+        <div
+          className="col-lg-6 col-md-12 col-sm-12 col-xs-12 taskbox "
+          key={task.id}
+        >
           <Task
             key={task.id}
             id={task.id}

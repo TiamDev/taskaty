@@ -16,9 +16,17 @@ const Sidebar = ({ user }) => {
   const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
   const navigat = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("loggedin");
-    localStorage.removeItem("user");
-
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const UpdateUser = users.map((u) => {
+      if (u.id === user.id) {
+        return {
+          ...u,
+          loggedin: false,
+        };
+      }
+      return u;
+    });
+    localStorage.setItem("users", JSON.stringify(UpdateUser));
     navigat("/");
   };
   return (

@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import "./taskbox.css";
 import image from "./../../../assets/image/mochi-post-it-notes (1).png";
 import image2 from "./../../../assets/image/mochi-exclamation-marks.png";
-
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Modal, Button } from "react-bootstrap";
 const Task = ({
   id,
-  title = "task title",
-  description = "description",
+  title,
+  description,
   date,
   startTime,
   endTime,
@@ -27,15 +26,14 @@ const Task = ({
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const handleEditClose = () => setShowEdit(false);
+  const handleDeleteClose = () => setShowDelete(false);
+  const handleEditShow = () => setShowEdit(true);
+  const handleDeleteShow = () => setShowDelete(true);
   // useEffect(() => {
   //   const storageTasks = JSON.parse(localStorage.getItem("tasks"));
   //   setTaskData(storageTasks);
   // }, []);
-  const handleEditClose = () => setShowEdit(false);
-  const handleDeleteClose = () => setShowDelete(false);
-
-  const handleEditShow = () => setShowEdit(true);
-  const handleDeleteShow = () => setShowDelete(true);
 
   const handleCheckClick = () => {
     const updatedTaskData = taskData.map((task) => {
@@ -106,13 +104,13 @@ const Task = ({
             </button>
             <ul className="dropdown-menu dropdown-menu-dark">
               <li>
-                <button className="dropdown-item " onClick={setShowEdit}>
+                <button className="dropdown-item " onClick={handleEditShow}>
                   <h6>Edit</h6>
                   <i className="bi bi-vector-pen"></i>
                 </button>
               </li>
               <li>
-                <button className="dropdown-item " onClick={setShowDelete}>
+                <button className="dropdown-item " onClick={handleDeleteShow}>
                   <h6>Delete</h6>
                   <i className="bi bi-trash3"></i>
                 </button>

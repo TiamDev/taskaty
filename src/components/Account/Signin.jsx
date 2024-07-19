@@ -14,6 +14,7 @@ const Signin = () => {
     id: "",
     email: "",
     password: "",
+    loggedin: false,
   });
   const navigate = useNavigate();
 
@@ -26,7 +27,16 @@ const Signin = () => {
 
     if (user) {
       // localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("loggedin", "true");
+      const loggedinUser = users.map((u) => {
+        if (u.id === user.id) {
+          return {
+            ...u,
+            loggedin: true,
+          };
+        }
+        return u;
+      });
+      localStorage.setItem("users", JSON.stringify(loggedinUser));
       navigate("/dashboard", { state: user.id });
     } else {
       // Check if the user is not found in the userData file
