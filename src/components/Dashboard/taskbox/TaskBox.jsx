@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import "./taskbox.css";
 import TaskBoxHeader from "./TaskBoxHeader";
 import Task from "./Task";
@@ -14,19 +14,25 @@ const TaskBox = ({ user }) => {
   const changeDisplayType = (e) => {
     setDisplayType(e);
   };
-  const completedTask = taskData.filter((task) => {
-    return task.isComplete && task.date == selectedDate && task.user_id == user;
-  });
-  const uncompletedTask = taskData.filter((task) => {
-    return (
-      !task.isComplete && task.date == selectedDate && task.user_id == user
-    );
-  });
+  const completedTask = useMemo(() => {
+    return taskData.filter((task) => {
+      return (
+        task.isComplete && task.date == selectedDate && task.user_id == user
+      );
+    });
+  }, [taskData]);
+  const uncompletedTask = useMemo(() => {
+    return taskData.filter((task) => {
+      return (
+        !task.isComplete && task.date == selectedDate && task.user_id == user
+      );
+    });
+  }, [taskData]);
 
   let taskToBeRendered = taskData;
-  if (displayType == "Completed") {
+  if (displayType === "Completed") {
     taskToBeRendered = completedTask;
-  } else if (displayType == "Uncompleted") {
+  } else if (displayType === "Uncompleted") {
     taskToBeRendered = uncompletedTask;
   } else {
     taskToBeRendered = taskData.filter((task) => {

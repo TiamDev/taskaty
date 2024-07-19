@@ -56,7 +56,7 @@ const TaskBoxHeader = ({ user, displayType, setType }) => {
         const Tasks = JSON.parse(storageTasks);
         setTaskData(Tasks);
       } catch (error) {
-        // console.error("Error parsing localStorage data:", error);
+        console.error("Error parsing localStorage data:", error);
         setTaskData([]);
       }
     } else {

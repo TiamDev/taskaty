@@ -118,7 +118,6 @@ const Signup = () => {
                           name="confirmPassword"
                           value={confirmPass}
                           onChange={(e) => {
-                            console.log(e.target.value);
                             setConfirmPass(e.target.value);
                           }}
                           className="form-control"
