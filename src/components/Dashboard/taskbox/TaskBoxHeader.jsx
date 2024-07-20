@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { Button, Modal } from "react-bootstrap";
 import { SearchContext } from "../../../contexts/SearchContext";
+import { ToastContext } from "../../../contexts/ToastContext";
+
 const TaskBoxHeader = ({ user, displayType, setType }) => {
-  const changeDisplayType = (e) => {
-    setType(e);
-  };
+  const { showHideToast } = useContext(ToastContext);
   const { taskData, setTaskData } = useContext(TaskContext);
   const [showAdd, setShowAdd] = useState(false);
   const [addTask, setAddTask] = useState({
@@ -20,7 +20,9 @@ const TaskBoxHeader = ({ user, displayType, setType }) => {
     date: new Date().toLocaleDateString(),
     priority: "necessary",
   });
-
+  const changeDisplayType = (e) => {
+    setType(e);
+  };
   const handleAddClose = () => setShowAdd(false);
   const handleAddShow = () => setShowAdd(true);
   const handleAddTask = () => {
@@ -48,6 +50,7 @@ const TaskBoxHeader = ({ user, displayType, setType }) => {
       date: new Date().toLocaleDateString(),
       priority: "necessary",
     });
+    showHideToast("Task Added Successfully");
   };
   useEffect(() => {
     const storageTasks = localStorage.getItem("tasks");

@@ -8,6 +8,7 @@ import Task from "./Task";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { SelectedDateContext } from "../../../contexts/SelectedDate";
 import { SearchContext } from "../../../contexts/SearchContext";
+import { ToastContext } from "../../../contexts/ToastContext";
 import { Button, Modal } from "react-bootstrap";
 
 const TaskBox = ({ user }) => {
@@ -16,6 +17,7 @@ const TaskBox = ({ user }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
   const [displayType, setDisplayType] = useState("all");
   const [modalTask, setModalTask] = useState("");
+  const { showHideToast } = useContext(ToastContext);
 
   /* modal*/
 
@@ -32,6 +34,7 @@ const TaskBox = ({ user }) => {
     handleDeleteClose();
     setTaskData(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    showHideToast("Task Deleted Successfully");
   };
 
   const [showEdit, setShowEdit] = useState(false);
@@ -39,7 +42,6 @@ const TaskBox = ({ user }) => {
   const handleEditShow = (task) => {
     setModalTask(task);
     setShowEdit(true);
-    console.log(modalTask);
   };
   const handleEditClick = () => {
     const updatedTasks = taskData.map((task) => {
@@ -59,6 +61,7 @@ const TaskBox = ({ user }) => {
     setTaskData(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     handleEditClose();
+    showHideToast("Task Updated Successfully");
   };
   /* ===modal===*/
 

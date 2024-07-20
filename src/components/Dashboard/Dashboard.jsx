@@ -4,19 +4,31 @@ import Sidebar from "./sidebar/Sidebar";
 import TaskBox from "./taskbox/TaskBox";
 import ProgressBox from "./progressbox/ProgressBox";
 import NotFound from "../NotFound";
+import ToastBar from "./taskbox/ToastBar";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { TaskContext } from "../../contexts/TaskContext";
 import { SearchContext } from "../../contexts/SearchContext";
 import { SelectedDateContext } from "../../contexts/SelectedDate";
+import { ToastContext } from "../../contexts/ToastContext";
 function App() {
   const [taskData, setTaskData] = useState([]);
   const [search, setSearch] = useState("");
   const [date] = useState(new Date().toLocaleDateString());
   const [selectedDate, setSelectedDate] = useState(date);
 
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+
+  function showHideToast(message) {
+    setShow(true);
+    setMessage(message);
+    setTimeout(() => {
+      setShow(false);
+    }, 3000);
+  }
   const getDayName = (date) => {
     const daysOfWeek = [
       "Sunday",
@@ -72,10 +84,13 @@ function App() {
                 </div>
                 <ProgressBox user={user.id}></ProgressBox>
                 <SearchContext.Provider value={{ search, setSearch }}>
-                  <TaskBox user={user.id}></TaskBox>
+                  <ToastContext.Provider value={{ showHideToast }}>
+                    <TaskBox user={user.id}></TaskBox>
+                  </ToastContext.Provider>
                 </SearchContext.Provider>
               </div>
             </div>
+            <ToastBar show={show} message={message}></ToastBar>
           </TaskContext.Provider>
         </SelectedDateContext.Provider>
       </>

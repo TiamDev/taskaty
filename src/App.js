@@ -10,7 +10,6 @@ import { UserContext } from "./contexts/UserContext";
 import ProtectedRoutes from "./Services/ProtectedRoutes";
 import { useState } from "react";
 import NotFound from "./components/NotFound";
-
 function App() {
   const [userData, setUserData] = useState([]);
   const createUser = (newUser) => {

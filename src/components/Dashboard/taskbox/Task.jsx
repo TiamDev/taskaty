@@ -1,18 +1,23 @@
 import React, { useContext, useState } from "react";
 import "./taskbox.css";
 import { TaskContext } from "../../../contexts/TaskContext";
+import { ToastContext } from "../../../contexts/ToastContext";
 const Task = ({ task, showDelete, showEdit }) => {
   const { taskData, setTaskData } = useContext(TaskContext);
-
+  const { showHideToast } = useContext(ToastContext);
   const handleCheckClick = () => {
-    const updatedTasks = taskData.map((task) => {
-      if (task.id === task.id) {
-        task.isComplete = !task.isComplete;
+    const updatedTasks = taskData.map((t) => {
+      if (t.id == task.id) {
+        t.isComplete = !t.isComplete;
       }
-      return task;
+      return t;
     });
     setTaskData(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    const handelMessage = task.isComplete
+      ? "Task Completed 😀"
+      : "Modify Task to incompleted 😓";
+    showHideToast(handelMessage);
   };
 
   const handleDeleteClick = () => {

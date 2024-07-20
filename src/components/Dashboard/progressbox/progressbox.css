@@ -90,10 +90,6 @@
   .selected__date {
     font-size: 16px;
   }
-  .progresses {
-    flex-wrap: nowrap;
-    width: 38vw;
-  }
 }
 @media screen and (max-width: 655px) {
   .image {

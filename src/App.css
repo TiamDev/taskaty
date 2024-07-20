@@ -24,6 +24,19 @@
   margin-left: 270px;
   transition: all 0.3s ease-in-out;
 }
+.toast {
+  /* background-color: rgba(0, 128, 0, 0.54); */
+  /* color: white; */
+  font-size: medium;
+  max-width: 300px;
+}
+.toast-body {
+}
+.toast-body i {
+  color: green;
+  font-size: 17px;
+  padding-right: 8px;
+}
 @media screen and (max-width: 1024px) {
   .user-info {
     left: 75px;
