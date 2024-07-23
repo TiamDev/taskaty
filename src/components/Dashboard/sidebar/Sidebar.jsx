@@ -10,10 +10,12 @@ import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
-import { SelectedDateContext } from "../../../contexts/SelectedDate";
+import { CalenderSelectedDateContext } from "../../../contexts/CalenderSelectedDateContext";
 const Sidebar = ({ user }) => {
   const [toggle, showMenu] = useState(false);
-  const { selectedDate, setSelectedDate } = useContext(SelectedDateContext);
+  const { calenderSelectedDate, setCalenderSelectedDate } = useContext(
+    CalenderSelectedDateContext
+  );
   const navigat = useNavigate();
   const handleLogout = () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
@@ -36,9 +38,9 @@ const Sidebar = ({ user }) => {
         <div className="side-content">
           <Calendar
             onClickDay={(e) => {
-              setSelectedDate(e.toLocaleDateString());
+              setCalenderSelectedDate(e.toLocaleDateString());
             }}
-            value={selectedDate}
+            value={calenderSelectedDate}
           />
           <div className={"profile center"}>
             <img src={pic} alt="" />

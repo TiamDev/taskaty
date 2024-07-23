@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useReducer } from "react";
 import "./taskbox.css";
 import { TaskContext } from "../../../contexts/TaskContext";
-import { ToastContext } from "../../../contexts/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
+import taskReducer from "../../../reducers/taskReducer";
+
 const Task = ({ task, showDelete, showEdit }) => {
-  const { taskData, setTaskData } = useContext(TaskContext);
-  const { showHideToast } = useContext(ToastContext);
+  const { taskData2, setTaskData } = useContext(TaskContext);
+  const { showHideToast } = useToast();
+  const [taskData, dispatch] = useReducer(taskReducer, []);
+
   const handleCheckClick = () => {
     const updatedTasks = taskData.map((t) => {
       if (t.id == task.id) {

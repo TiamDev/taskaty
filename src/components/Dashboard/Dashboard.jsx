@@ -4,31 +4,16 @@ import Sidebar from "./sidebar/Sidebar";
 import TaskBox from "./taskbox/TaskBox";
 import ProgressBox from "./progressbox/ProgressBox";
 import NotFound from "../NotFound";
-import ToastBar from "./taskbox/ToastBar";
-
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
 import { TaskContext } from "../../contexts/TaskContext";
-import { SearchContext } from "../../contexts/SearchContext";
-import { SelectedDateContext } from "../../contexts/SelectedDate";
-import { ToastContext } from "../../contexts/ToastContext";
+import { CalenderSelectedDateContext } from "../../contexts/CalenderSelectedDateContext";
+import { ToastProvider } from "../../contexts/ToastContext";
 function App() {
   const [taskData, setTaskData] = useState([]);
-  const [search, setSearch] = useState("");
   const [date] = useState(new Date().toLocaleDateString());
-  const [selectedDate, setSelectedDate] = useState(date);
+  const [calenderSelectedDate, setCalenderSelectedDate] = useState(date);
 
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
-
-  function showHideToast(message) {
-    setShow(true);
-    setMessage(message);
-    setTimeout(() => {
-      setShow(false);
-    }, 3000);
-  }
   const getDayName = (date) => {
     const daysOfWeek = [
       "Sunday",
@@ -64,7 +49,9 @@ function App() {
   if (user) {
     return (
       <>
-        <SelectedDateContext.Provider value={{ selectedDate, setSelectedDate }}>
+        <CalenderSelectedDateContext.Provider
+          value={{ calenderSelectedDate, setCalenderSelectedDate }}
+        >
           <TaskContext.Provider value={{ taskData, setTaskData }}>
             <div className="dashboard">
               <Sidebar user={user}></Sidebar>
@@ -83,16 +70,13 @@ function App() {
                   </div>
                 </div>
                 <ProgressBox user={user.id}></ProgressBox>
-                <SearchContext.Provider value={{ search, setSearch }}>
-                  <ToastContext.Provider value={{ showHideToast }}>
-                    <TaskBox user={user.id}></TaskBox>
-                  </ToastContext.Provider>
-                </SearchContext.Provider>
+                <ToastProvider>
+                  <TaskBox user={user.id}></TaskBox>
+                </ToastProvider>
               </div>
             </div>
-            <ToastBar show={show} message={message}></ToastBar>
           </TaskContext.Provider>
-        </SelectedDateContext.Provider>
+        </CalenderSelectedDateContext.Provider>
       </>
     );
   } else {

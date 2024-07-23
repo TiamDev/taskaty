@@ -21,9 +21,6 @@ function ToastBar({ show, message }) {
           </Toast>
         </ToastContainer>
       </Col>
-      {/* <Col xs={6}>
-        <Button onClick={() => setShow(true)}>Show Toast</Button>
-      </Col> */}
     </Row>
   );
 }

@@ -3,7 +3,7 @@ import "./progressbox.css";
 import Progress from "./Progress";
 import image from "./../../../assets/image/mochi-woman-reading-a-book-or-novel.png";
 import { TaskContext } from "../../../contexts/TaskContext";
-import { SelectedDateContext } from "../../../contexts/SelectedDate";
+import { CalenderSelectedDateContext } from "../../../contexts/CalenderSelectedDateContext";
 import "react-circular-progressbar/dist/styles.css";
 import {
   CircularProgressbarWithChildren,
@@ -12,10 +12,10 @@ import {
 
 const ProgressBox = ({ user }) => {
   const { taskData } = useContext(TaskContext);
-  const { selectedDate } = useContext(SelectedDateContext);
+  const { calenderSelectedDate } = useContext(CalenderSelectedDateContext);
 
   const Tasks = taskData.filter((task) => {
-    return task.date == selectedDate && task.user_id === user;
+    return task.date == calenderSelectedDate && task.user_id === user;
   });
   const CompletedTasks = Tasks.filter((task) => {
     return task.isComplete;
@@ -57,7 +57,9 @@ const ProgressBox = ({ user }) => {
     normal = (normalDatacompleted / normalData) * 100;
   }
   const day =
-    selectedDate === new Date().toLocaleDateString() ? "Today" : selectedDate;
+    calenderSelectedDate === new Date().toLocaleDateString()
+      ? "Today"
+      : calenderSelectedDate;
   const completion =
     Tasks.length === 0
       ? ""
