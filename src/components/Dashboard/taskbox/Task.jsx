@@ -1,10 +1,10 @@
 import "./taskbox.css";
-import { useDispatch, useTasks } from "../../../contexts/TaskContext";
+import { useTaskDispatch, useTasks } from "../../../contexts/TaskContext";
 import { useToast } from "../../../contexts/ToastContext";
 
 const Task = ({ task, showDelete, showEdit }) => {
   const taskData = useTasks();
-  const dispatch = useDispatch();
+  const dispatch = useTaskDispatch();
   const { showHideToast } = useToast();
   const handleCheckClick = () => {
     dispatch({ type: "toggledCompleted", payload: task });

@@ -7,7 +7,7 @@ import { CalenderSelectedDateContext } from "../../../contexts/CalenderSelectedD
 import { Button, Modal } from "react-bootstrap";
 import { useToast } from "../../../contexts/ToastContext";
 import { useTasks } from "../../../contexts/TaskContext";
-import { useDispatch } from "../../../contexts/TaskContext";
+import { useTaskDispatch } from "../../../contexts/TaskContext";
 
 const TaskBox = ({ user }) => {
   const { calenderSelectedDate } = useContext(CalenderSelectedDateContext);
@@ -17,7 +17,7 @@ const TaskBox = ({ user }) => {
   const [modalTask, setModalTask] = useState("");
   const [showAdd, setShowAdd] = useState(false);
   const taskData = useTasks();
-  const dispatch = useDispatch();
+  const dispatch = useTaskDispatch();
 
   useEffect(() => {
     dispatch({ type: "get" });

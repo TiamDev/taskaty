@@ -7,7 +7,6 @@ import NotFound from "../NotFound";
 import TaskProvider from "../../contexts/TaskContext";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useTasks } from "../../contexts/TaskContext";
 import { CalenderSelectedDateContext } from "../../contexts/CalenderSelectedDateContext";
 import { ToastProvider } from "../../contexts/ToastContext";
 
