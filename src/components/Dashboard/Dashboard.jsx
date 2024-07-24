@@ -4,16 +4,16 @@ import Sidebar from "./sidebar/Sidebar";
 import TaskBox from "./taskbox/TaskBox";
 import ProgressBox from "./progressbox/ProgressBox";
 import NotFound from "../NotFound";
+import TaskProvider from "../../contexts/TaskContext";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { TaskContext } from "../../contexts/TaskContext";
+import { useTasks } from "../../contexts/TaskContext";
 import { CalenderSelectedDateContext } from "../../contexts/CalenderSelectedDateContext";
 import { ToastProvider } from "../../contexts/ToastContext";
-function App() {
-  const [taskData, setTaskData] = useState([]);
+
+function Dashboard() {
   const [date] = useState(new Date().toLocaleDateString());
   const [calenderSelectedDate, setCalenderSelectedDate] = useState(date);
-
   const getDayName = (date) => {
     const daysOfWeek = [
       "Sunday",
@@ -27,19 +27,14 @@ function App() {
     const dayIndex = new Date(date).getDay();
     return daysOfWeek[dayIndex];
   };
-
-  const dayName = getDayName(date);
-  //
-
   const formatDate = (date) => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     const formattedDate = new Date(date).toLocaleString("en-US", options);
     return formattedDate;
   };
-
   const formattedDate = formatDate(date);
+  const dayName = getDayName(date);
 
-  //
   const usersStorage = JSON.parse(localStorage.getItem("users")) || [];
   const user_id = useLocation();
 
@@ -52,7 +47,7 @@ function App() {
         <CalenderSelectedDateContext.Provider
           value={{ calenderSelectedDate, setCalenderSelectedDate }}
         >
-          <TaskContext.Provider value={{ taskData, setTaskData }}>
+          <TaskProvider>
             <div className="dashboard">
               <Sidebar user={user}></Sidebar>
               <div className="content">
@@ -75,7 +70,7 @@ function App() {
                 </ToastProvider>
               </div>
             </div>
-          </TaskContext.Provider>
+          </TaskProvider>
         </CalenderSelectedDateContext.Provider>
       </>
     );
@@ -84,4 +79,4 @@ function App() {
   }
 }
 
-export default App;
+export default Dashboard;

@@ -61,7 +61,17 @@ export default function reducer(currentTask, action) {
         return [];
       }
     }
-
+    case "toggledCompleted": {
+      const updatedTasks = currentTask.map((t) => {
+        if (t.id == action.payload.id) {
+          const updateTask = { ...t, isComplete: !t.isComplete };
+          return updateTask;
+        }
+        return t;
+      });
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return updatedTasks;
+    }
     default: {
       throw Error("unknown Action " + action.type);
     }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./progressbox.css";
 import Progress from "./Progress";
 import image from "./../../../assets/image/mochi-woman-reading-a-book-or-novel.png";
-import { TaskContext } from "../../../contexts/TaskContext";
+import { useTasks } from "../../../contexts/TaskContext";
 import { CalenderSelectedDateContext } from "../../../contexts/CalenderSelectedDateContext";
 import "react-circular-progressbar/dist/styles.css";
 import {
@@ -11,7 +11,7 @@ import {
 } from "react-circular-progressbar";
 
 const ProgressBox = ({ user }) => {
-  const { taskData } = useContext(TaskContext);
+  const taskData = useTasks();
   const { calenderSelectedDate } = useContext(CalenderSelectedDateContext);
 
   const Tasks = taskData.filter((task) => {

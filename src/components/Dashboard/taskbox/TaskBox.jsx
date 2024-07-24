@@ -1,18 +1,13 @@
-import React, {
-  useContext,
-  useState,
-  useReducer,
-  useMemo,
-  useEffect,
-} from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import "./taskbox.css";
 import image from "./../../../assets/image/mochi-post-it-notes (1).png";
 import image2 from "./../../../assets/image/mochi-exclamation-marks.png";
 import Task from "./Task";
 import { CalenderSelectedDateContext } from "../../../contexts/CalenderSelectedDateContext";
-import { useToast } from "../../../contexts/ToastContext";
 import { Button, Modal } from "react-bootstrap";
-import taskReducer from "../../../reducers/taskReducer";
+import { useToast } from "../../../contexts/ToastContext";
+import { useTasks } from "../../../contexts/TaskContext";
+import { useDispatch } from "../../../contexts/TaskContext";
 
 const TaskBox = ({ user }) => {
   const { calenderSelectedDate } = useContext(CalenderSelectedDateContext);
@@ -20,8 +15,9 @@ const TaskBox = ({ user }) => {
   const [displayType, setDisplayType] = useState("all");
   const [search, setSearch] = useState("");
   const [modalTask, setModalTask] = useState("");
-  const [taskData, dispatch] = useReducer(taskReducer, []);
   const [showAdd, setShowAdd] = useState(false);
+  const taskData = useTasks();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: "get" });

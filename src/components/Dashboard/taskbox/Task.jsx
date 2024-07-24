@@ -1,26 +1,16 @@
-import React, { useContext, useState, useReducer } from "react";
 import "./taskbox.css";
-import { TaskContext } from "../../../contexts/TaskContext";
+import { useDispatch, useTasks } from "../../../contexts/TaskContext";
 import { useToast } from "../../../contexts/ToastContext";
-import taskReducer from "../../../reducers/taskReducer";
 
 const Task = ({ task, showDelete, showEdit }) => {
-  const { taskData2, setTaskData } = useContext(TaskContext);
+  const taskData = useTasks();
+  const dispatch = useDispatch();
   const { showHideToast } = useToast();
-  const [taskData, dispatch] = useReducer(taskReducer, []);
-
   const handleCheckClick = () => {
-    const updatedTasks = taskData.map((t) => {
-      if (t.id == task.id) {
-        t.isComplete = !t.isComplete;
-      }
-      return t;
-    });
-    setTaskData(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    dispatch({ type: "toggledCompleted", payload: task });
     const handelMessage = task.isComplete
-      ? "Task Completed 😀"
-      : "Modify Task to incompleted 😓";
+      ? "Modify Task to incompleted 😓"
+      : "Task Completed 😀";
     showHideToast(handelMessage);
   };
 
